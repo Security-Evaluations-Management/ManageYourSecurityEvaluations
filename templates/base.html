@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}">
+    {% block page_title %}
+    {% endblock %}
+    {% block rel %}
+    {% endblock %}
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="{{ url_for('main.index') }}">
+            <img alt="Carleton University Logo" src="/static/images/Carleton_University_Logo.svg">
+        </a>
+    </div>
+    <ul>
+        <li class="home">
+            <a href="{{ url_for('main.index') }}">
+                Home
+            </a>
+        </li>
+        {% if not current_user.is_authenticated %}
+            <li>
+                <a href="{{ url_for('auth.login') }}">
+                    Login
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('auth.signup') }}">
+                    Sign Up
+                </a>
+            </li>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+            <li>
+                <a href="{{ url_for('auth.logout') }}">
+                    Logout
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</header>
+
+<div class="body-content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+
+<footer>
+    <p>Manage Your Security Evaluations &nbsp &copy Copyright 2021</p>
+</footer>
+
+</html>

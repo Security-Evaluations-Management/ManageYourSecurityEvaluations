@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block rel %}
+    <link rel="stylesheet" href="/static/css/welcomePage.css">
+{% endblock %}
+
+{% block page_title %}
+    <title>Welcome to Manage Your Security Evaluations</title>
+{% endblock %}
+
+{% block content %}
+    {% if not current_user.is_authenticated %}
+        <h1>Welcome to Manage Your Security Evaluations, <a href="{{ url_for('auth.login') }}">Click to login</a></h1>
+    {% endif %}
+    {% if current_user.is_authenticated %}
+        <h1>Welcome to Manage Your Security Evaluations, {{ current_user.name }}</h1>
+    {% endif %}
+{% endblock %}
