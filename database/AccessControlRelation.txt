@@ -1,0 +1,16 @@
+insert into role_right values ('Developer','criteria','view');
+insert into role_right values ('Developer','evidence','modify');
+insert into role_right values ('Developer','evidence','create');
+insert into role_right values ('Developer','evidence','delete');
+insert into role_right values ('Administrator','criteria','create');
+insert into role_right values ('Administrator','criteria','modify');
+insert into role_right values ('Administrator','criteria','delete');
+insert into role_right values ('Administrator','evidence','create');
+insert into role_right values ('Administrator','evidence','modify');
+insert into role_right values ('Administrator','evidence','delete');
+insert into role_right values ('Administrator','role','assign');
+insert into role_right values ('Quality Analyst','evidence','view');
+
+insert into role(role_name) values ('Developer');
+insert into role(role_name) values ('Administrator');
+insert into role(role_name) values ('Quality Analyst');
