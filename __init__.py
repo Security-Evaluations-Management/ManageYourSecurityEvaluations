@@ -20,16 +20,24 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(server)
 
-    from .src.models import User
+    from src.models import User
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from .src.auth import auth as auth_blueprint
+    from src.auth import auth as auth_blueprint
     server.register_blueprint(auth_blueprint)
 
-    from .src.main import main as main_blueprint
+    from src.main import main as main_blueprint
     server.register_blueprint(main_blueprint)
 
+    from src.upload import upload as upload_blueprint
+    server.register_blueprint(upload_blueprint)
+
     return server
+
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run()
