@@ -94,7 +94,7 @@ For more example, please refer to the [Documentation Section](https://github.com
 
 
 ## Contributing
-To make contributions to the project, please follow the steps:
+To make contributions to our project, please follow the steps:
 1. Fork the Project
 2. Create your Feature Branch 
 	```sh
