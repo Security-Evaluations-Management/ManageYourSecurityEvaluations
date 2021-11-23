@@ -28,10 +28,10 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from .src.auth import auth as auth_blueprint
+    from .src.auth import auth_blueprint
     server.register_blueprint(auth_blueprint)
 
-    from .src.main import main as main_blueprint
+    from .src.main import main_blueprint
     server.register_blueprint(main_blueprint)
 
     return server
