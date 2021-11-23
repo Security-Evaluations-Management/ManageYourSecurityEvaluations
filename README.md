@@ -47,7 +47,7 @@ Below is an example of how to run the project.
 
 1. Clone the project to your local environment.
 	```sh
-	git clone https://github.com/Security-Evaluations-Management/ManageYourSecurityEvaluations.git
+	git clone --recursive  https://github.com/Security-Evaluations-Management/ManageYourSecurityEvaluations.git
 	```
 2. Change to project directory
 	```sh
