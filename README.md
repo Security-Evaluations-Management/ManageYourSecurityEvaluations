@@ -19,7 +19,7 @@ This project aims to develop a platform that developers can use to store and man
 generated during the entire system development lifecycle for future security assessments.
 
 ### Team Members
-This project is supervised and directed by **Dr. Jason Jaskolka**, Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />
+This project is supervised and directed by [**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />
 Team Members includes:<br />
 **&emsp;&emsp;<a href="https://www.linkedin.com/in/zijun-hu/">Zijun Hu</a><br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
