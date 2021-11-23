@@ -85,7 +85,7 @@ Below is an example of how to run the project.
 This project can be used can use to store and manage the security evidence 
 generated during the entire system development lifecycle for future security assessments.
 
-For more example, please refer to the [Documentation Section](https://github.com/Security-Evaluations-Management/myse-documentation)
+For more detailed information, please refer to the [Documentation Section](https://github.com/Security-Evaluations-Management/myse-documentation)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
