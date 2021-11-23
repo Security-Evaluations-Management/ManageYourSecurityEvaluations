@@ -1,0 +1,6 @@
+[submodule "myse-database"]
+	path = myse-database
+	url = https://github.com/Security-Evaluations-Management/myse-database.git
+[submodule "myse-frontend"]
+	path = myse-frontend
+	url = https://github.com/Security-Evaluations-Management/myse-frontend.git

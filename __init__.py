@@ -7,11 +7,13 @@ user_db = SQLAlchemy()
 
 
 def create_app():
-    server = Flask(__name__)
+    template_dir = os.path.abspath('./myse-frontend/templates')
+    static_folder = os.path.abspath('./myse-frontend/static')
+    server = Flask(__name__, template_folder=template_dir, static_folder=static_folder)
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                                           'database/user_db.sqlite3')
+                                                                           'myse-database/user_db.sqlite3')
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     user_db.init_app(server)
