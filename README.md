@@ -26,7 +26,7 @@ Team Members includes:<br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
 
-### Build With**
+### Build With
 * [**Python**](https://www.python.org/)
 * [**Flask**](https://flask.palletsprojects.com/en/2.0.x/)
 
