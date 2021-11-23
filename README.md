@@ -98,7 +98,7 @@ To make contributions to our project, please follow the following steps:
 1. Fork the Project
 2. Create your Feature Branch 
 	```sh
-	git checkout -b feature/NewFeature`)
+	git checkout -b feature/NewFeatureName`)
 	```
 3. Commit your New Feature
 	```sh
@@ -106,7 +106,7 @@ To make contributions to our project, please follow the following steps:
 	```
 4. Push to the Branch 
 	```sh
-	git push origin feature/NewFeature
+	git push origin feature/NewFeatureName
 	```
 5. Open a Pull Request
 
