@@ -53,7 +53,7 @@ Below is an example of how to run the project.
 	```sh
 	cd ./ManageYourSecurityEvaluations
 	```
-3. Exporting the FLASK_APP environment variable depends on the terminal you're using.<br />
+3. Exporting the FLASK_APP environment variable depends on the OS you're using.<br />
 	**Bash**
 	```sh 
 	$ export FLASK_APP=__init__.py
