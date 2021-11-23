@@ -40,7 +40,7 @@ This is an example of how to run the project.
 * [**Python**](https://www.python.org/): Recommend using the latest version of Python.
 * [**Flask**](https://flask.palletsprojects.com/en/2.0.x/): Use the following command to install Flask.<br />
 		&emsp;&emsp;```$ pip install Flask ```
-* [**Git**](https://git-scm.com/): Required when clone the project. Recommend using the latest version.
+* [**Git**](https://git-scm.com/): Required when cloning the project. Recommend using the latest version.
 
 ### Run the project
 Below is an example of how to run the project.
