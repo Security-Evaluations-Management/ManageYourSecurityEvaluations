@@ -1,6 +1,7 @@
 create table employee
   (employee_ID 	serial,
    name			varchar(20),
+   email		varchar(40),
    salt			numeric(8,0),
    hash_value	varchar(64),
    primary key (employee_ID)
@@ -31,6 +32,7 @@ create table evidence
 	(criteria_ID	serial,
 	 evidence_ID	serial unique,
 	 tag			varchar(20),
+	 URL			varchar(2083),
 	 create_date	date,
 	 last_edit_time	timestamp,
 	 comment		varchar(100),
