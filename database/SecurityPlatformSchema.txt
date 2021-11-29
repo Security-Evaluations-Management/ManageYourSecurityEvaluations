@@ -2,11 +2,10 @@ create table employee
   (employee_ID 	serial,
    name			varchar(20),
    email		varchar(40),
-   salt			numeric(8,0),
    hash_value	varchar(64),
    primary key (employee_ID)
   );
- 
+
 create table role
   (role_ID		serial,
    role_name	varchar(20) unique,
@@ -20,14 +19,14 @@ create table role_right
    primary key (role_name, object, access_right),
    foreign key (role_name) references role(role_name)
   );
-  
-create table criteria 
+
+create table criteria
   (criteria_ID		serial,
    criteria_name	varchar(20),
    comment			varchar(100),
    primary key	(criteria_ID)
   );
-  
+
 create table evidence
 	(criteria_ID	serial,
 	 evidence_ID	serial unique,
@@ -57,7 +56,7 @@ create table manage_criteria
 	 criteria_ID	serial,
 	 primary key (role_ID, criteria_ID),
 	 foreign key (criteria_ID) references criteria(criteria_ID),
-	 foreign key (role_ID) references role(role_ID)	 
+	 foreign key (role_ID) references role(role_ID)
 	);
 
 create table manage_evidence
