@@ -5,16 +5,16 @@ from flask_login import login_user, logout_user, login_required
 # from .. import user_db
 from Database import *
 
-auth = Blueprint('auth', __name__)
+auth_blueprint = Blueprint('auth', __name__)
 db = Database()
 
 
-@auth.route('/login')
+@auth_blueprint.route('/login')
 def login():
     return render_template('login.html')
 
 
-@auth.route('/login', methods=['POST'])
+@auth_blueprint.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -47,7 +47,7 @@ def login_post():
     return redirect(url_for('main.index'))
 
 
-@auth.route('/signup')
+@auth_blueprint.route('/signup')
 def signup():
     return render_template('signup.html')
 
@@ -76,7 +76,7 @@ def signup_post():
     return redirect(url_for('auth.login'))
 
 
-@auth.route('/logout')
+@auth_blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
