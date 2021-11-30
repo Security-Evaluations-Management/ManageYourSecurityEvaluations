@@ -2,7 +2,7 @@ create table employee
   (employee_ID 	serial,
    name			varchar(20),
    email		varchar(40),
-   hash_value	varchar(64),
+   hash_value	varchar(100),
    primary key (employee_ID)
   );
 

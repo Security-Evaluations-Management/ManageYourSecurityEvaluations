@@ -8,7 +8,7 @@ class Database:
 
     # search whether user is inside the
     def search_user(self, email):
-        self.cur.execute("select * from employee where email=%s", email)
+        self.cur.execute("select * from employee where email=(%s)", (email,))
         rows = self.cur.fetchall()
         return rows
 
@@ -26,7 +26,7 @@ class Database:
     # add a new employ into the database
     # need check user exist or not before call this method
     def add_new_user(self, name, email, hash_value):
-        self.cur.execute("insert into employee(name, email, hash_value) VALUES(%s,%s,%s)", name, email, hash_value)
+        self.cur.execute("insert into employee(name, email, hash_value) VALUES(%s,%s,%s)", (name, email, hash_value))
         self.conn.commit()
 
         # remove below things if function works

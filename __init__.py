@@ -2,11 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
-import psycopg2
-from psycopg2 import pool
 
-
-# user_db = SQLAlchemy()
+user_db = SQLAlchemy()
 
 
 def create_app():
@@ -15,16 +12,10 @@ def create_app():
     server = Flask(__name__, template_folder=template_dir, static_folder=static_folder)
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
-    # server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-    #                                                                        'myse-database/user_db.sqlite3')
-    server.config['postgreSQL_pool'] = psycopg2.pool.SimpleConnectionPool(dbname="Security Platform", user="postgres",
-                                                                          password="si4848748", port="8888")
-    db = server.config['postgreSQL_pool'].getconn()
-    # server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgre:si4848748@localhost:8888/Security Platform'
+    server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # user_db.init_app(server)
-
-    db.init_app(server)
+    user_db.init_app(server)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
