@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, login_required
 # from .models import User
 # from .. import user_db
 from .Database import *
-from .models import User
 
 auth_blueprint = Blueprint('auth', __name__)
 db = Database()
@@ -12,6 +11,8 @@ db = Database()
 
 @auth_blueprint.route('/login')
 def login():
+    if 'loggedin' in session:
+        return redirect(url_for('auth.profile'))
     return render_template('login.html')
 
 
@@ -19,7 +20,6 @@ def login():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
 
     user_exist = db.check_if_user_exist(email)
 
@@ -32,9 +32,11 @@ def login_post():
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login'))
 
-    user_info = db.search_user(email)[0]
-    user = User(user_info)
-    login_user(user, remember=remember)
+        user_info = db.search_user(email)[0]
+        session['loggedin'] = True
+        session['id'] = user_info[0]
+        session['username'] = user_info[1]
+        session['email'] = user_info[2]
 
     return redirect(url_for('main.index'))
 
@@ -61,7 +63,16 @@ def signup_post():
 
 
 @auth_blueprint.route('/logout')
-@login_required
 def logout():
-    logout_user()
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    session.pop('email', None)
     return redirect(url_for('main.index'))
+
+
+@auth_blueprint.route('/profile')
+def profile():
+    if 'loggedin' in session:
+        return render_template('profile.html', id=session['id'], username=session['username'], email=session['email'])
+    return redirect(url_for('auth.login'))
