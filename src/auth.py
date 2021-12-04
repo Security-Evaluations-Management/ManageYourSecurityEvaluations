@@ -4,6 +4,7 @@ from flask_login import login_user, login_required
 # from .models import User
 # from .. import user_db
 from .Database import *
+from .models import User
 
 auth_blueprint = Blueprint('auth', __name__)
 db = Database()
