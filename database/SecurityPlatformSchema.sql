@@ -2,7 +2,7 @@ create table client
   	(ID 			serial,
    	 name			varchar(20),
    	 email		varchar(40),
- 	 hash_value	varchar(64),
+ 	 hash_value	varchar(88),
   	 primary key (ID)
  	);
  

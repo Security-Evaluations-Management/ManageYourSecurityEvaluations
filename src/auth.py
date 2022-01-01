@@ -4,7 +4,6 @@ from flask_login import login_user, login_required
 # from .models import User
 # from .. import user_db
 from .Database import *
-from .models import User
 
 auth_blueprint = Blueprint('auth', __name__)
 db = Database()
@@ -58,8 +57,7 @@ def signup_post():
         return redirect(url_for('auth.signup'))
 
     hash_password = generate_password_hash(password, method='sha256', salt_length=16)
-    print(hash_password)
-    db.add_new_user(name, email, hash_password)
+    db.add_new_developer(name, email, hash_password)
     return redirect(url_for('auth.login'))
 
 

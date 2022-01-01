@@ -28,16 +28,30 @@ class Database:
     def get_user_hashed_password(self, email):
         return self.search_user(email)[0][3]
 
-    # add a new employ into the database
+    # add new developer into client table and assign the role
+    def add_new_developer(self, name, email, hash_value):
+        self.add_new_user(name, email, hash_value)
+        self.assign_role(email, developer_id)
+
+    # add new quality analyst into client table and assign the role
+    def add_new_qa(self, name, email, hash_value):
+        self.add_new_user(name, email, hash_value)
+        self.assign_role(email, qa_id)
+
+    # add new admin into client table and assign the role
+    def add_new_admin(self, name, email, hash_value):
+        self.add_new_user(name, email, hash_value)
+        self.assign_role(email, admin_id)
+
+    # add a new user into the database
     # need check user exist or not before call this method
     def add_new_user(self, name, email, hash_value):
         self.cur.execute("insert into client(name, email, hash_value) VALUES(%s,%s,%s);", (name, email, hash_value,))
         self.conn.commit()
 
-    # assign the
-    def assign_role(self, name, role):
-        self.cur.execute("insert into ")
+    # assign the role for client
+    def assign_role(self, email, role_id):
+        client_id = self.search_user(email)[0][0]
+        self.cur.execute("insert into assign(client_id, role_id) values(%s, %s);", (client_id, role_id,))
+        self.conn.commit()
 
-# self.conn.commit()
-
-# conn.close()
