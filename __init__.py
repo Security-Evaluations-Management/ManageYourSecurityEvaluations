@@ -1,9 +1,7 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from .src.models import main_db
 import os
-
-user_db = SQLAlchemy()
 
 
 def create_app():
@@ -13,16 +11,17 @@ def create_app():
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                                           'myse-database/user_db.sqlite3')
+                                                                           'myse-database/main_db.sqlite3')
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    user_db.init_app(server)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(server)
 
     from .src.models import User
+    main_db.init_app(server)
+    with server.app_context():
+        main_db.create_all()  # create database
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -33,5 +32,14 @@ def create_app():
 
     from .src.main import main_blueprint
     server.register_blueprint(main_blueprint)
+
+    from .src.view import view_blueprint
+    server.register_blueprint(view_blueprint)
+
+    from .src.upload import upload_blueprint
+    server.register_blueprint(upload_blueprint)
+
+    from .src.search import search_blueprint
+    server.register_blueprint(search_blueprint)
 
     return server
