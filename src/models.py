@@ -6,10 +6,12 @@ main_db = SQLAlchemy()
 
 class User(main_db.Model, UserMixin):
     id = main_db.Column(main_db.Integer, primary_key=True)
-    email = main_db.Column(main_db.String(255, collation='NOCASE'), nullable=False, unique=True)
-    password = main_db.Column(main_db.String(255), nullable=False)
     name = main_db.Column(main_db.String(50))
+    email = main_db.Column(main_db.String(120, collation='NOCASE'), nullable=False, unique=True)
+    password = main_db.Column(main_db.String(88), nullable=False)
     role_id = main_db.Column(main_db.Integer, main_db.ForeignKey('role.id'), nullable=False)
+    criteria = main_db.relationship('Criteria', backref='user', lazy='dynamic')
+    evidence = main_db.relationship('Evidence', backref='user', lazy='dynamic')
 
 
 # Define the Role data-model
@@ -17,16 +19,32 @@ class Role(main_db.Model):
     __tablename__ = 'role'
     id = main_db.Column(main_db.Integer(), primary_key=True)
     name = main_db.Column(main_db.String(50), unique=True)
-    user = main_db.relationship('User', backref='role', lazy=True)
+    user = main_db.relationship('User', backref='role', lazy='dynamic')
 
 
 class Evidence(main_db.Model):
     __tablename__ = 'evidence'
     id = main_db.Column(main_db.Integer, primary_key=True)
     name = main_db.Column(main_db.String(20))
+    project_name = main_db.Column(main_db.String(20), nullable=False)
+    create_date_time = main_db.Column(main_db.DateTime, nullable=False)
+    last_edit_time = main_db.Column(main_db.DateTime, nullable=False)
+    description = main_db.Column(main_db.String(200))
+    url = main_db.Column(main_db.String(2048), nullable=False)
+    user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
+    criteria_id = main_db.Column(main_db.Integer, main_db.ForeignKey('criteria.id'), nullable=False)
 
     def __init__(self, name):
         self.name = name
+
+
+class Criteria(main_db.Model):
+    __tablename__ = 'criteria'
+    id = main_db.Column(main_db.Integer, primary_key=True)
+    name = main_db.Column(main_db.String(20))
+    description = main_db.Column(main_db.String(200))
+    user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
+    evidence = main_db.relationship('Evidence', backref='criteria', lazy='dynamic')
 
 
 def add_new_user(email, password, name):
