@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 main_db = SQLAlchemy()
 
@@ -33,6 +34,16 @@ class Evidence(main_db.Model):
     url = main_db.Column(main_db.String(2048), nullable=False)
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     criteria_id = main_db.Column(main_db.Integer, main_db.ForeignKey('criteria.id'), nullable=False)
+
+    def __init__(self, name, project_name, description, url, user_id, criteria_id):
+        self.name = name
+        self.project_name = project_name
+        self.create_date_time = datetime.now()
+        self.last_edit_time = datetime.now()
+        self.description = description
+        self.url = url
+        self.user_id = user_id
+        self.criteria_id = criteria_id
 
 
 class Criteria(main_db.Model):
@@ -117,28 +128,81 @@ def get_all_users():
     return users
 
 
-def add_evidence(evidence_name):
-    if evidence_name:
-        evidence = Evidence(evidence_name)
+def add_evidence(evidence_name, project_name, description, url, user_id, criteria_id):
+    if evidence_name and project_name and url and user_id and criteria_id:
+        evidence = Evidence(evidence_name, project_name, description, url, user_id, criteria_id)
         main_db.session.add(evidence)
         main_db.session.commit()
         return True
     return False
 
 
+# get all developers' name as a list
 def users_name():
     usernames = [users.name
                  for users in main_db.session.query(User.name).join(Role).filter(Role.name == "DEV")]
     return usernames
 
 
+# get all criteria name as a list
 def criterias_name():
     criteria_names = [criteria.name
                       for criteria in main_db.session.query(Criteria.name)]
     return criteria_names
 
 
+# get all project name as a list
 def projects_name():
     project_names = [evidence.project_name
                      for evidence in main_db.session.query(Evidence.project_name)]
     return project_names
+
+
+# get evidence as a dictionary through evidence id
+def get_evidence_info(evidence_id):
+    evidence = Evidence.query.filter_by(id=evidence_id).first().__dict__
+    evidence.pop('_sa_instance_state', None)
+    return evidence
+
+
+# get evidence by filters
+def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
+    if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
+        return None
+    else:
+        sql = "select " \
+              "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, url " \
+              "from evidence join user on evidence.user_id = user.id" \
+              " join criteria on evidence.criteria_id = criteria.id where"
+        if criteria_name:
+            sql += (" criteria.name=" + criteria_name)
+        if project_name:
+            if any(v is not None for v in [criteria_name]):
+                sql += " and"
+            sql += (" project_name=" + project_name)
+        if employee_name:
+            if any(v is not None for v in [criteria_name, project_name]):
+                sql += " and"
+            sql += (" user.name=" + employee_name)
+        if create_time:
+            if any(v is not None for v in [criteria_name, project_name, employee_name]):
+                sql += " and"
+            sql += (" create_date_time=" + create_time)
+        if last_edit_time:
+            if any(v is not None for v in [criteria_name, project_name, employee_name, create_time]):
+                sql += " and"
+            sql += (" last_edit_time=" + last_edit_time)
+        if evidence_id:
+            if any(v is not None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time]):
+                sql += " and"
+            sql += (" evidence.id=" + evidence_id)
+        result = main_db.engine.execute(sql)
+        return result
+
+# def test(user_id, email):
+#    if all(v is None for v in [user_id, email]):
+#        return None
+#    else:
+#        sql = "select user.id, email, password, user.name, role.name from user join role on role_id = role.id where role.name = \"DEV\""
+#        result = main_db.engine.execute(sql)
+#        return result
