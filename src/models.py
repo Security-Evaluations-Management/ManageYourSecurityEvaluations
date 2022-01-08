@@ -34,9 +34,6 @@ class Evidence(main_db.Model):
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     criteria_id = main_db.Column(main_db.Integer, main_db.ForeignKey('criteria.id'), nullable=False)
 
-    def __init__(self, name):
-        self.name = name
-
 
 class Criteria(main_db.Model):
     __tablename__ = 'criteria'
@@ -127,3 +124,21 @@ def add_evidence(evidence_name):
         main_db.session.commit()
         return True
     return False
+
+
+def users_name():
+    usernames = [users.name
+                 for users in main_db.session.query(User.name).join(Role).filter(Role.name == "DEV")]
+    return usernames
+
+
+def criterias_name():
+    criteria_names = [criteria.name
+                      for criteria in main_db.session.query(Criteria.name)]
+    return criteria_names
+
+
+def projects_name():
+    project_names = [evidence.project_name
+                     for evidence in main_db.session.query(Evidence.project_name)]
+    return project_names
