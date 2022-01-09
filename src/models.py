@@ -202,7 +202,6 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
                 sql += " and"
             sql += (" evidence.id=" + evidence_id)
         result = main_db.engine.execute(sql)
-        print(sql)
         return result.fetchall()
 
 
