@@ -12,6 +12,8 @@ def upload():
     if not approve_access(current_user.role.name, 'upload'):
         abort(403)
 
+    criteria_list = models.get
+
     return render_template('upload.html')
 
 
@@ -21,6 +23,10 @@ def upload_post():
     if not approve_access(current_user.role.name, 'upload'):
         abort(403)
 
-    evidence_name = request.form.get('evidence_name')
+    user_id = current_user.id
+    evidence_name = request.form.get('ev_name')
+    project_name = request.form.get('proj_name')
+
+
     models.add_evidence(evidence_name)
     return render_template('upload.html')
