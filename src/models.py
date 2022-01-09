@@ -138,7 +138,6 @@ def add_evidence(evidence_name, project_name, description, url, user_id, criteri
 
 
 # get all developers' name as a list
-# UNIQUE!!!!
 def users_name():
     usernames = [users.name
                  for users in main_db.session.query(User.name).join(Role).filter(Role.name == "DEV")]
@@ -207,9 +206,11 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
         return result.fetchall()
 
 
+# convert date format from yyyy/mm/dd to yyyy-mm-dd
 def convert_date_format(date):
     return datetime.strptime(date, "%Y/%m/%d").strftime("%Y-%m-%d")
 
 
+# add one more day for given date string, which format is yyyy-mm-dd
 def add_one_day(date):
     return (datetime.strptime(date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
