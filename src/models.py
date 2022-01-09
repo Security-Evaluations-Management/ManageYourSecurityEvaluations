@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timedelta
 
 main_db = SQLAlchemy()
 
@@ -138,9 +138,11 @@ def add_evidence(evidence_name, project_name, description, url, user_id, criteri
 
 
 # get all developers' name as a list
+# UNIQUE!!!!
 def users_name():
     usernames = [users.name
                  for users in main_db.session.query(User.name).join(Role).filter(Role.name == "DEV")]
+    usernames = list(dict.fromkeys(usernames))
     return usernames
 
 
@@ -148,6 +150,7 @@ def users_name():
 def criterias_name():
     criteria_names = [criteria.name
                       for criteria in main_db.session.query(Criteria.name)]
+    criteria_names = list(dict.fromkeys(criteria_names))
     return criteria_names
 
 
@@ -155,6 +158,7 @@ def criterias_name():
 def projects_name():
     project_names = [evidence.project_name
                      for evidence in main_db.session.query(Evidence.project_name)]
+    project_names = list(dict.fromkeys(project_names))
     return project_names
 
 
@@ -175,38 +179,37 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
               "from evidence join user on evidence.user_id = user.id" \
               " join criteria on evidence.criteria_id = criteria.id where"
         if criteria_name:
-            sql += (" criteria.name=\"" + criteria_name+"\"")
+            sql += (" criteria.name=\"" + criteria_name + "\"")
         if project_name:
             if any(v is not None for v in [criteria_name]):
                 sql += " and"
-            sql += (" project_name=\"" + project_name+"\"")
+            sql += (" project_name=\"" + project_name + "\"")
         if employee_name:
             if any(v is not None for v in [criteria_name, project_name]):
                 sql += " and"
-            sql += (" user.name=\"" + employee_name+"\"")
+            sql += (" user.name=\"" + employee_name + "\"")
         if create_time:
+            create_time = convert_date_format(create_time)
             if any(v is not None for v in [criteria_name, project_name, employee_name]):
                 sql += " and"
-            sql += (" create_date_time=\"" + create_time+"\"")
+            sql += (" create_date_time between date(\"" + create_time + "\")" + " and " + "date(\"" + add_one_day(create_time) + "\")")
         if last_edit_time:
+            last_edit_time = convert_date_format(last_edit_time)
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time]):
                 sql += " and"
-            sql += (" last_edit_time=\"" + last_edit_time+"\"")
+            sql += (" last_edit_time between date(\"" + last_edit_time + "\")" + " and " + "date(\"" + add_one_day(last_edit_time) + "\")")
         if evidence_id:
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time]):
                 sql += " and"
-            sql += (" evidence.id=\"" + evidence_id+"\"")
-        print(sql)
+            sql += (" evidence.id=" + evidence_id)
         result = main_db.engine.execute(sql)
-        print(result.fetchall())
-        return result
+        print(sql)
+        return result.fetchall()
 
 
-def test(user_id, email):
-   if all(v is None for v in [user_id, email]):
-        return None
-   else:
-       sql = "select user.id, email, password, user.name, role.name from user join role on role_id = role.id where role.name = \"Admin\""
-       result = main_db.engine.execute(sql)
-       print(result.fetchall())
-       return result
+def convert_date_format(date):
+    return datetime.strptime(date, "%Y/%m/%d").strftime("%Y-%m-%d")
+
+
+def add_one_day(date):
+    return (datetime.strptime(date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
