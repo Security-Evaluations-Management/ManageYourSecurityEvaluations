@@ -175,34 +175,38 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
               "from evidence join user on evidence.user_id = user.id" \
               " join criteria on evidence.criteria_id = criteria.id where"
         if criteria_name:
-            sql += (" criteria.name=" + criteria_name)
+            sql += (" criteria.name=\"" + criteria_name+"\"")
         if project_name:
             if any(v is not None for v in [criteria_name]):
                 sql += " and"
-            sql += (" project_name=" + project_name)
+            sql += (" project_name=\"" + project_name+"\"")
         if employee_name:
             if any(v is not None for v in [criteria_name, project_name]):
                 sql += " and"
-            sql += (" user.name=" + employee_name)
+            sql += (" user.name=\"" + employee_name+"\"")
         if create_time:
             if any(v is not None for v in [criteria_name, project_name, employee_name]):
                 sql += " and"
-            sql += (" create_date_time=" + create_time)
+            sql += (" create_date_time=\"" + create_time+"\"")
         if last_edit_time:
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time]):
                 sql += " and"
-            sql += (" last_edit_time=" + last_edit_time)
+            sql += (" last_edit_time=\"" + last_edit_time+"\"")
         if evidence_id:
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time]):
                 sql += " and"
-            sql += (" evidence.id=" + evidence_id)
+            sql += (" evidence.id=\"" + evidence_id+"\"")
+        print(sql)
         result = main_db.engine.execute(sql)
+        print(result.fetchall())
         return result
 
-# def test(user_id, email):
-#    if all(v is None for v in [user_id, email]):
-#        return None
-#    else:
-#        sql = "select user.id, email, password, user.name, role.name from user join role on role_id = role.id where role.name = \"DEV\""
-#        result = main_db.engine.execute(sql)
-#        return result
+
+def test(user_id, email):
+   if all(v is None for v in [user_id, email]):
+        return None
+   else:
+       sql = "select user.id, email, password, user.name, role.name from user join role on role_id = role.id where role.name = \"Admin\""
+       result = main_db.engine.execute(sql)
+       print(result.fetchall())
+       return result
