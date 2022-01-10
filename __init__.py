@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
-from .src.models import main_db
+from src.models import main_db
 import os
 
 
