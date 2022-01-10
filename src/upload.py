@@ -40,7 +40,6 @@ def upload_post():
     if file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
-        print(file_path)
         models.add_evidence(evidence_name, project_name, description, file_path, user_id, criteria_id)
 
         return redirect(url_for('view.view'))
