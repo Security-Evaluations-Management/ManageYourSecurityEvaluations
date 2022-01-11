@@ -153,6 +153,14 @@ def criterias_name():
     return criteria_names
 
 
+# get pair of criteria id and name
+def criteria_id_name():
+    sql = "select id, name from criteria"
+    result = main_db.engine.execute(sql)
+    # print(result.fetchall())
+    return result.fetchall()
+
+
 # get all project name as a list
 def projects_name():
     project_names = [evidence.project_name

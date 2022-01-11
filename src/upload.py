@@ -14,8 +14,8 @@ def upload():
     if not approve_access(current_user.role.name, 'upload'):
         abort(403)
 
-    #criteria_list = models.
-    criteria_list = [1, 2, 3, 4, 5]
+    criteria_list = models.criteria_id_name()
+    print(criteria_list)
 
     return render_template('upload.html', criteria_list=criteria_list)
 
