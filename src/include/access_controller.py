@@ -3,23 +3,21 @@ def approve_access(role, action):
         'Admin': {
             'upload': True,
             'search': True,
-            'admin': True
+            'admin': True,
+            'criteria': True,
+            'criteria_modification': True
         },
         'DEV': {
             'upload': True,
             'search': True,
-            'admin': False
+            'criteria': True
         },
         'QA': {
-            'upload': False,
-            'search': False,
-            'admin': False
+            'search': True,
+            'criteria': True
         },
         'User': {
-            'upload': False,
-            'search': False,
-            'admin': False
         }
     }
 
-    return access_control_matrix[role][action]
+    return access_control_matrix[role][action] if action in access_control_matrix[role] else False

@@ -128,6 +128,29 @@ def get_all_users():
     return users
 
 
+def get_all_criteria():
+    return Criteria.query.all()
+
+
+def add_criteria(name, description, creator):
+    new_criteria = Criteria(name=name, description=description)
+
+    creator = User.query.filter_by(name=creator.name).first()
+    if not creator:
+        return False
+
+    creator.criteria.append(new_criteria)
+    main_db.session.add(new_criteria)
+    main_db.session.commit()
+    return True
+
+
+def remove_criteria(criteria_id):
+    Criteria.query.filter_by(id=criteria_id).delete()
+    main_db.session.commit()
+    return True
+
+
 def add_evidence(evidence_name, project_name, description, url, user_id, criteria_id):
     if evidence_name and project_name and url and user_id and criteria_id:
         evidence = Evidence(evidence_name, project_name, description, url, user_id, criteria_id)
@@ -146,14 +169,14 @@ def users_name():
 
 
 # get all criteria name as a list
-def criterias_name():
+def get_all_criteria_name():
     criteria_names = [criteria.name
                       for criteria in main_db.session.query(Criteria.name)]
     criteria_names = list(dict.fromkeys(criteria_names))
     return criteria_names
 
 
-# get pair of criteria id and name
+# get a pair of criteria id and name
 def criteria_id_name():
     sql = "select id, name from criteria"
     result = main_db.engine.execute(sql)

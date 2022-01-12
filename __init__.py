@@ -36,10 +36,10 @@ def create_app():
     from .src.view import view_blueprint
     server.register_blueprint(view_blueprint)
 
-    from .src.upload import upload_blueprint
-    server.register_blueprint(upload_blueprint)
+    from .src.evidence import evidence_blueprint
+    server.register_blueprint(evidence_blueprint)
 
-    from .src.search import search_blueprint
-    server.register_blueprint(search_blueprint)
+    from .src.criteria import criteria_blueprint
+    server.register_blueprint(criteria_blueprint)
 
     return server
