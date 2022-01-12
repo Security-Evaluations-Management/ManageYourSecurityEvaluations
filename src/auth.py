@@ -30,6 +30,7 @@ def login_post():
 
 @auth_blueprint.route('/signup')
 def signup():
+
     return render_template('signup.html')
 
 
