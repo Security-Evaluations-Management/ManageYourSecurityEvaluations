@@ -2,8 +2,11 @@ from flask import Blueprint, render_template, abort, request, redirect, url_for,
 from flask_login import login_required, current_user
 from src import models
 from src.include.access_controller import approve_access
+import os
+
 
 evidence_blueprint = Blueprint('evidence', __name__)
+UPLOAD_FOLDER = 'upload_files'
 
 
 @evidence_blueprint.route('/search')
