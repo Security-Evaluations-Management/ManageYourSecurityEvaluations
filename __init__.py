@@ -10,8 +10,9 @@ def create_app():
     server = Flask(__name__, template_folder=template_dir, static_folder=static_folder)
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
-    server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                                           'myse-database/main_db.sqlite3')
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://datfnwhxavwfud' \
+                                               ':bc70529444aa8701c3d720e64811509a4b759740149018c2f031b3d00e355a07@ec2' \
+                                               '-34-194-171-47.compute-1.amazonaws.com:5432/d4i9o4ipsdq857'
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     login_manager = LoginManager()

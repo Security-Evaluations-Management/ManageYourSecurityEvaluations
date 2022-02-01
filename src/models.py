@@ -192,7 +192,7 @@ def projects_name():
     return project_names
 
 
-# get evidence as a dictionary through evidence id
+# get evidence as a dictionary through evidence idF
 def get_evidence_info(evidence_id):
     evidence = Evidence.query.filter_by(id=evidence_id).first().__dict__
     evidence.pop('_sa_instance_state', None)
