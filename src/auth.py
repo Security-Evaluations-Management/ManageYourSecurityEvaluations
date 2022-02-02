@@ -44,7 +44,7 @@ def signup_post():
     strong_password = check_password(password)
 
     if models.user_exist(email):
-        flash('Email address already exists.')
+        flash('Email address already exists. Please login!')
         return redirect(url_for('auth.signup'))
     elif not strong_password:
         flash('Please follow the password rules.')
