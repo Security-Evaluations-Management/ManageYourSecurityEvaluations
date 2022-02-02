@@ -35,6 +35,13 @@ def criteria_creation_post():
         abort(403)
 
     file = request.files.get('criteria_file')
+    cname = request.form.get('criteria_name')
+    description = request.form.get('description')
+
+    if cname != "" and description != "":
+        if not models.add_criteria(cname, description, current_user):
+            flash("upload fail or criteria already exist")
+
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER_TEMP)
@@ -48,9 +55,8 @@ def criteria_creation_post():
             print(row['name'] + "," + row['description'])
             if not models.add_criteria(row['name'], row['description'], current_user):
                 flash("upload fail or criteria already exist")
-        return redirect(url_for('criteria.criteria'))
 
-    return abort(400)
+    return redirect(url_for('criteria.criteria'))
 
 
 @criteria_blueprint.route('/criteria/delete', methods=['POST'])
