@@ -1,3 +1,5 @@
+import re
+
 from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -30,7 +32,6 @@ def login_post():
 
 @auth_blueprint.route('/signup')
 def signup():
-
     return render_template('signup.html')
 
 
@@ -40,13 +41,24 @@ def signup_post():
     name = request.form.get('name')
     password = request.form.get('password')
 
+    strong_password = check_password(password)
+
     if models.user_exist(email):
-        flash('Email address already exists.')
+        flash('Email address already exists. Please login!')
+        return redirect(url_for('auth.signup'))
+    elif not strong_password:
+        flash('Please follow the password rules.')
         return redirect(url_for('auth.signup'))
 
     models.add_new_user(email, generate_password_hash(password, method='sha256', salt_length=16), name)
 
     return redirect(url_for('auth.login'))
+
+
+def check_password(password):
+    strong_password = not (len(password) < 8 or re.search(r"\d", password) is None
+                           or re.search(r"[A-Z]", password) is None or re.search(r"[a-z]", password) is None)
+    return strong_password
 
 
 @auth_blueprint.route('/logout')
