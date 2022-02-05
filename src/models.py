@@ -199,10 +199,19 @@ def get_evidence_info(evidence_id):
     return evidence
 
 
+def no_filter_search_result():
+    sql = "select " \
+          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, url " \
+          "from evidence join user on evidence.user_id = user.id" \
+          " join criteria on evidence.criteria_id = criteria.id"
+    result = main_db.engine.execute(sql)
+    return result.fetchall()
+
+
 # get evidence by filters
 def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
     if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
-        return None
+        return no_filter_search_result()
     else:
         sql = "select " \
               "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, url " \
@@ -222,12 +231,14 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
             create_time = convert_date_format(create_time)
             if any(v is not None for v in [criteria_name, project_name, employee_name]):
                 sql += " and"
-            sql += (" create_date_time between date(\"" + create_time + "\")" + " and " + "date(\"" + add_one_day(create_time) + "\")")
+            sql += (" create_date_time between date(\"" + create_time + "\")" + " and " + "date(\"" + add_one_day(
+                create_time) + "\")")
         if last_edit_time:
             last_edit_time = convert_date_format(last_edit_time)
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time]):
                 sql += " and"
-            sql += (" last_edit_time between date(\"" + last_edit_time + "\")" + " and " + "date(\"" + add_one_day(last_edit_time) + "\")")
+            sql += (" last_edit_time between date(\"" + last_edit_time + "\")" + " and " + "date(\"" + add_one_day(
+                last_edit_time) + "\")")
         if evidence_id:
             if any(v is not None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time]):
                 sql += " and"
