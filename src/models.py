@@ -26,7 +26,7 @@ class Role(main_db.Model):
 class Evidence(main_db.Model):
     __tablename__ = 'evidence'
     id = main_db.Column(main_db.Integer, primary_key=True)
-    name = main_db.Column(main_db.String(20))
+    name = main_db.Column(main_db.String(20), unique=True)
     project_name = main_db.Column(main_db.String(20), nullable=False)
     create_date_time = main_db.Column(main_db.DateTime, nullable=False)
     last_edit_time = main_db.Column(main_db.DateTime, nullable=False)
@@ -49,7 +49,7 @@ class Evidence(main_db.Model):
 class Criteria(main_db.Model):
     __tablename__ = 'criteria'
     id = main_db.Column(main_db.Integer, primary_key=True)
-    name = main_db.Column(main_db.String(20))
+    name = main_db.Column(main_db.String(20), unique=True)
     description = main_db.Column(main_db.String(200))
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     evidence = main_db.relationship('Evidence', backref='criteria', lazy='dynamic')
