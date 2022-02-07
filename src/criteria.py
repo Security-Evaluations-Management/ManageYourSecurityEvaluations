@@ -2,8 +2,18 @@ from flask import Blueprint, abort, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from src.include.access_controller import approve_access
 from src import models
+import pandas as pd
+from werkzeug.utils import secure_filename
+import os
+
 
 criteria_blueprint = Blueprint('criteria', __name__)
+ALLOWED_EXTENTION = {'csv'}
+UPLOAD_FOLDER_TEMP = 'temp_storage'
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTION
 
 
 @criteria_blueprint.route('/criteria')
@@ -24,12 +34,29 @@ def criteria_creation_post():
     if not approve_access(current_user.role.name, 'criteria_modification'):
         abort(403)
 
-    new_criteria_name = request.form.get("new_criteria_name")
-    new_criteria_description = request.form.get("new_criteria_description")
-    if models.add_criteria(new_criteria_name, new_criteria_description, current_user):
-        return redirect(url_for('criteria.criteria'))
+    file = request.files.get('criteria_file')
+    cname = request.form.get('criteria_name')
+    description = request.form.get('description')
 
-    return abort(400)
+    if cname != "" and description != "":
+        if not models.add_criteria(cname, description, current_user):
+            flash("upload fail or criteria already exist")
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER_TEMP)
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+        file.save(os.path.join(file_dir, filename))
+
+        file.stream.seek(0)
+        dataframe = pd.read_csv(file)
+        for index, row in dataframe.iterrows():
+            print(row['name'] + "," + row['description'])
+            if not models.add_criteria(row['name'], row['description'], current_user):
+                flash("upload fail or criteria already exist")
+
+    return redirect(url_for('criteria.criteria'))
 
 
 @criteria_blueprint.route('/criteria/delete', methods=['POST'])
