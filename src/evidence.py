@@ -99,8 +99,10 @@ def upload_post():
 
     if file:
         file_path = os.path.join(file_dir, file.filename)
-        file.save(file_path)
-        models.add_evidence(evidence_name, project_name, description, file_path, user_id, criteria_id)
+        #file.save(file_path)
+        f = open(file_path,'r')
+        contents = f.read()
+        models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
 
         return redirect(url_for('view.view'))
     else:

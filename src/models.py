@@ -30,18 +30,18 @@ class Evidence(main_db.Model):
     project_name = main_db.Column(main_db.String(20), nullable=False)
     create_date_time = main_db.Column(main_db.DateTime, nullable=False)
     last_edit_time = main_db.Column(main_db.DateTime, nullable=False)
-    description = main_db.Column(main_db.String(200))
-    url = main_db.Column(main_db.String(2048), nullable=False)
+    description = main_db.Column(main_db.String)
+    content = main_db.Column(main_db.String, nullable=False)
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     criteria_id = main_db.Column(main_db.Integer, main_db.ForeignKey('criteria.id'), nullable=False)
 
-    def __init__(self, name, project_name, description, url, user_id, criteria_id):
+    def __init__(self, name, project_name, description, content, user_id, criteria_id):
         self.name = name
         self.project_name = project_name
         self.create_date_time = datetime.now()
         self.last_edit_time = datetime.now()
         self.description = description
-        self.url = url
+        self.content = content
         self.user_id = user_id
         self.criteria_id = criteria_id
 
@@ -151,9 +151,9 @@ def remove_criteria(criteria_id):
     return True
 
 
-def add_evidence(evidence_name, project_name, description, url, user_id, criteria_id):
-    if evidence_name and project_name and url and user_id and criteria_id:
-        evidence = Evidence(evidence_name, project_name, description, url, user_id, criteria_id)
+def add_evidence(evidence_name, project_name, description, content, user_id, criteria_id):
+    if evidence_name and project_name and content and user_id and criteria_id:
+        evidence = Evidence(evidence_name, project_name, description, content, user_id, criteria_id)
         main_db.session.add(evidence)
         main_db.session.commit()
         return True
@@ -201,7 +201,7 @@ def get_evidence_info(evidence_id):
 
 def no_filter_search_result():
     sql = "select " \
-          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, url " \
+          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content " \
           "from evidence join user on evidence.user_id = user.id" \
           " join criteria on evidence.criteria_id = criteria.id"
     result = main_db.engine.execute(sql)
@@ -214,7 +214,7 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
         return no_filter_search_result()
     else:
         sql = "select " \
-              "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, url " \
+              "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content " \
               "from evidence join user on evidence.user_id = user.id" \
               " join criteria on evidence.criteria_id = criteria.id where"
         if criteria_name:
