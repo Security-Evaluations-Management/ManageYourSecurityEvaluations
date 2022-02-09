@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, render_template, request, redirect, url_for
+from flask import Blueprint, abort, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from src.include.access_controller import approve_access
 from src import models

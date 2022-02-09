@@ -38,7 +38,7 @@
                     <p>
                         <select name="criteria" id="lang" size="8">
                         {% for criteria in criteria_list %}
-                            <option value="{{ criteria[0] }}">{{ criteria[1] }}</option>
+                            <option value= {{ criteria.id  }}>{{ criteria.name }}</option>
                         {% endfor %}}
                     </select>
                     </p>

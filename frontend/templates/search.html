@@ -86,11 +86,11 @@
             </tr>
             {% for evidence in results %}
             <tr>
-                <td>{{ evidence[1] }}</td>
-                <td>{{ evidence[3] }}</td>
-                <td>{{ evidence[4] }}</td>
+                <td>{{ evidence.name }}</td>
+                <td>{{ evidence.create_date_time}}</td>
+                <td>{{ evidence.last_edit_time }}</td>
                 <td>
-                    <a href="http://127.0.0.1:5000/view",id = "{{ evidence[0] }}">View</a>
+                    <a href="{{ url_for('view.view') }}"evidence.id>View</a>
                 </td>
             </tr>
             {% endfor %}
