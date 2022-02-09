@@ -180,7 +180,6 @@ def get_all_criteria_name():
 def criteria_id_name():
     sql = "select id, name from criteria"
     result = main_db.engine.execute(sql)
-    # print(result.fetchall())
     return result.fetchall()
 
 
@@ -245,6 +244,23 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
             sql += (" evidence.id=" + evidence_id)
         result = main_db.engine.execute(sql)
         return result.fetchall()
+
+
+# get evidence info in detail through evidence id
+def get_evidence_by_id(evidence_id):
+    sql = "select " \
+          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content, " \
+          "criteria.id, criteria.name, criteria.description " \
+          "from evidence join user on evidence.user_id = user.id" \
+          " join criteria on evidence.criteria_id = criteria.id where evidence.id =" + evidence_id
+    result = main_db.engine.execute(sql)
+    return result.fetchall()
+
+
+# update evidence content
+def update_evidence(evidence_id, new_content):
+    stmt = Evidence.update().where(Evidence.c.id == evidence_id).values(content=new_content)
+    main_db.engine.execute(stmt)
 
 
 # convert date format from yyyy/mm/dd to yyyy-mm-dd
