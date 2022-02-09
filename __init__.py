@@ -11,7 +11,7 @@ def create_app():
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                                           'database/main_db.sqlite3')
+                                                                           'main_db.sqlite3')
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     login_manager = LoginManager()
