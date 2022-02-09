@@ -2,6 +2,8 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 
+from sqlalchemy import update
+
 main_db = SQLAlchemy()
 
 
@@ -259,7 +261,7 @@ def get_evidence_by_id(evidence_id):
 
 # update evidence content
 def update_evidence(evidence_id, new_content):
-    stmt = Evidence.update().where(Evidence.c.id == evidence_id).values(content=new_content)
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(content=new_content)
     main_db.engine.execute(stmt)
 
 
