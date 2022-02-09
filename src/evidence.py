@@ -4,7 +4,6 @@ from src import models
 from src.include.access_controller import approve_access
 import os
 
-
 evidence_blueprint = Blueprint('evidence', __name__)
 UPLOAD_FOLDER = 'upload_files'
 
@@ -92,6 +91,7 @@ def upload_post():
     description = request.form.get('description')
     criteria_id = request.form.get('criteria')
     file = request.files.get('file_upload')
+    upload_error = False
 
     file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER)
     if not os.path.exists(file_dir):
@@ -100,11 +100,17 @@ def upload_post():
     if file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
-        f = open(file_path,'r')
+        f = open(file_path, 'r')
         contents = f.read()
-        models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
-
-        return redirect(url_for('view.view'))
+        if not contents:
+            upload_error = True
+        if not models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id):
+            upload_error = True
     else:
+        upload_error = True
+
+    if upload_error:
         flash("file not upload")
         return redirect(url_for('evidence.upload'))
+    else:
+        return redirect(url_for('view.view'))
