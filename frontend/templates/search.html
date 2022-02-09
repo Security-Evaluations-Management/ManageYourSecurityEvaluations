@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block rel %}
+    <link rel="stylesheet" href="/static/css/search.css">
+{% endblock %}
+
+{% block page_title %}
+    <title>Search Evidence</title>
+{% endblock %}
+
+{% block content %}
+    <form action="/search" method="POST">
+    <h3 class="title">Search Evidence</h3>
+    <table>
+        <tr>
+            <td>
+                <label>ID:</label>
+                <input type="text" id="id" name="id" placeholder="e.g 0001" pattern="[0-9]{4}">
+             </td>
+        </tr>
+        <tr>
+            <td>
+            Criteria: <select name="criteria" id="criteria">
+                <option value="" selected = "selected">Select criteria</option>
+                {% for criteria_name in criteria_names %}
+                <option value="{{ criteria_name }}" >{{ criteria_name }}</option>
+                {% endfor %}
+                      </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Project: <select name="project" id="project">
+                <option value="" selected = "selected">Select project</option>
+                {% for project_name in project_names %}
+                <option value="{{ project_name }}">{{ project_name }}</option>
+                {% endfor %}
+                      </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Employee Name: <select name="employee_name"  id="employee_name">
+                <option value="" selected = "selected">Select employee name</option>
+                {% for employee_name in employee_names %}
+                <option value="{{ employee_name }}">{{ employee_name }}</option>
+                {% endfor %}
+                          </select>
+            </td>
+        </tr>
+        <tr>
+             <td>
+                <label>Create Time:</label>
+                <input type="text" id="create_time" name="create_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
+             </td>
+        </tr>
+        <tr>
+             <td>
+                <label>Last Edit Time:</label>
+                <input type="text" id="ledit_time" name="ledit_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
+             </td>
+        </tr>
+        <tr>
+            <td>
+            <input type="submit" name="action" value="Search"/>
+            </td>
+        </tr>
+    </table>
+
+    {% with message = get_flashed_messages() %}
+        {% if message %}
+            <div>
+                {{ message[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if results %}
+     <h3 class="title">Here is what we found:</h3>
+
+        <table>
+            <tr>
+                <th>Evidence Name</th>
+                <th>url</th>
+            </tr>
+            {% for evidence in results %}
+            <tr>
+                <td>{{ evidence[1] }}</td>
+
+                <td>
+                    <a href="http://127.0.0.1:5000/view",id = "{{ evidence[0] }}">{{ evidence[6] }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+     {% endif %}
+
+
+    </form>
+{% endblock %}

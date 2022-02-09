@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3 class="title">Sign Up</h3>
+    {% with message = get_flashed_messages() %}
+        {% if message %}
+            <div>
+                {{ message[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form action="/signup" method="POST">
+        <label>
+            <input type="text" name="name" placeholder="Name" autofocus=""><br>
+        </label>
+        <label>
+            <input type="email" name="email" placeholder="Email" autofocus=""><br>
+        </label>
+        <label>
+            <input type="password" name="password" placeholder="Password"><br>
+        </label>
+        <button>Sign Up</button>
+    </form>
+    <div id="password_rules">
+        <h3>Password must contain the following:</h3>
+        <ul id="password_rules">
+            <li>lowercase</li>
+            <li>capital (uppercase)</li>
+            <li>number</li>
+            <li>Minimum 8 characters</li>
+        </ul>
+    </div>
+{% endblock %}

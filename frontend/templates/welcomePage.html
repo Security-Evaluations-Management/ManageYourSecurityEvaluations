@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block rel %}
+    <link rel="stylesheet" href="/static/css/welcomePage.css">
+{% endblock %}
+
+{% block page_title %}
+    <title>Welcome to Manage Your Security Evaluations</title>
+{% endblock %}
+
+{% block content %}
+    {% if not current_user.is_authenticated %}
+        <h1>Welcome to Manage Your Security Evaluations, <a href="{{ url_for('auth.login') }}">Click to login</a></h1>
+    {% elif current_user.is_authenticated %}
+        <h1>Welcome to Manage Your Security Evaluations, {{ current_user.name }}!</h1>
+        <form action="/update" method="POST">
+            <table id="user_profile">
+                <tr>
+                    <th colspan="2">Your Profile:</th>
+                </tr>
+                <tr>
+                    <td><b>Name: </b></td>
+                    <td>
+                        <label>
+                            <input type="text" name="name" value="{{ current_user.name }}"/>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Email: </b></td>
+                    <td>{{ current_user.email }}</td>
+                </tr>
+                <tr>
+                    <td><b>Role: </b></td>
+                    <td>{{ current_user.role.name }}</td>
+                </tr>
+                <tr>
+                    <td><b>New Password:</b></td>
+                    <td>
+                        <label>
+                            <input type="password" name="password" placeholder="Password"><br>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" name="action" value="Update"/>
+        </form>
+
+        <div>
+            {% if current_user.role == 'dev' or current_user.role == 'admin' %}
+                <h2>Evidence Uploaded by you: </h2>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

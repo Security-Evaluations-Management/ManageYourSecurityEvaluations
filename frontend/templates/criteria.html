@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block rel %}
+    <link rel="stylesheet" href="/static/css/criteria.css">
+{% endblock %}
+
+{% block page_title %}
+    <title>Manage Users</title>
+{% endblock %}
+
+{% block content %}
+    {% if allow_modification %}
+        <h3 class="title">Add New Criteria</h3>
+
+        <form action="/criteria/creation" method="POST" enctype="multipart/form-data">
+            <label>Criteria Name: </label>
+                <input type="text" name="criteria_name" placeholder="criteria name" autofocus=""><br>
+            <label>Criteria Description</label>
+                <input type="text" name="description" autofocus=""><br>
+            <label> Upload criteria file:
+                <input type="file", name="criteria_file"><br>
+            </label>
+            <input type="submit" name="action" value="Submit"/>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+    {% if not criteria_list %}
+        <h3 class="title">No Criteria Exist</h3>
+    {% else %}
+        <h3 class="title">Criteria List</h3>
+        <table id="Criteria List">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Creator</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for criteria in criteria_list %}
+                <form action="/criteria/delete" method="POST">
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
+                            </label>
+                        </td>
+                        <td>{{ criteria.name }}</td>
+                        <td>{{ criteria.description }}</td>
+                        <td>{{ criteria.user.name }}</td>
+                        <td>
+                            {% if allow_modification %}
+                                <input type="submit" name="action" value="Delete"/>
+                            {% else %}
+                                <input type="submit" name="action" value="Delete" disabled/>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </form>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

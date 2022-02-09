@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block rel %}
+    <link rel="stylesheet" href="/static/css/admin.css">
+{% endblock %}
+
+{% block page_title %}
+    <title>Manage Users</title>
+{% endblock %}
+
+{% block content %}
+    {% if user_list.__len__() == 1 %}
+        <h3 class="title">No Other Users</h3>
+    {% else %}
+        <h3 class="title">User List </h3>
+        <table id="user_list">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Submit</th>
+            </tr>
+            {% for user in user_list %}
+                {% if not user.id == current_user.id %}
+                    <form action="/admin" method="POST">
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="text" name="id" value="{{ user.id }}" readonly/>
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="text" name="name" value="{{ user.name }}"/>
+                                </label>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <label>
+                                    {% if user.role.name == 'User' %}
+                                        <input type="radio" name="role" value="User" checked>
+                                    {% else %}
+                                        <input type="radio" name="role" value="User">
+                                    {% endif %}
+                                </label>User
+                                <label>
+                                    {% if user.role.name == 'DEV' %}
+                                        <input type="radio" name="role" value="DEV" checked>
+                                    {% else %}
+                                        <input type="radio" name="role" value="DEV">
+                                    {% endif %}
+                                </label>Developer
+                                <label>
+                                    {% if user.role.name == 'QA' %}
+                                        <input type="radio" name="role" value="QA" checked>
+                                    {% else %}
+                                        <input type="radio" name="role" value="QA">
+                                    {% endif %}
+                                </label>Quality Analyst
+                                <label>
+                                    {% if user.role.name == 'Admin' %}
+                                        <input type="radio" name="role" value="Admin" checked>
+                                    {% else %}
+                                        <input type="radio" name="role" value="Admin">
+                                    {% endif %}
+                                </label>Admin
+                            </td>
+                            <td>
+                                <input type="submit" name="action" value="Update"/>
+                                <input type="submit" name="action" value="Delete"/>
+                                <input type="submit" name="action" value="Reset Password"/>
+                            </td>
+                        </tr>
+                    </form>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

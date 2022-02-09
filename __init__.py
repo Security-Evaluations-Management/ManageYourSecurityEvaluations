@@ -5,13 +5,13 @@ import os
 
 
 def create_app():
-    template_dir = os.path.abspath('./myse-frontend/templates')
-    static_folder = os.path.abspath('./myse-frontend/static')
+    template_dir = os.path.abspath('./frontend/templates')
+    static_folder = os.path.abspath('./frontend/static')
     server = Flask(__name__, template_folder=template_dir, static_folder=static_folder)
 
     server.config['SECRET_KEY'] = os.urandom(12).hex()
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                                           'myse-database/main_db.sqlite3')
+                                                                           'database/main_db.sqlite3')
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     login_manager = LoginManager()
