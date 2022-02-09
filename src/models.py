@@ -1,7 +1,6 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
-
 from sqlalchemy import update
 
 main_db = SQLAlchemy()
