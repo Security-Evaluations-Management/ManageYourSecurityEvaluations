@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, abort, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from src import models
+from sqlalchemy.exc import SQLAlchemyError
 from src.include.access_controller import approve_access
 import os
 
@@ -103,14 +104,13 @@ def upload_post():
         f = open(file_path, 'r')
         contents = f.read()
         if not contents:
-            upload_error = True
-        if not models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id):
-            upload_error = True
-    else:
-        upload_error = True
-
-    if upload_error:
-        flash("file not upload")
-        return redirect(url_for('evidence.upload'))
-    else:
+            contents = " "
+        try:
+            models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
+        except SQLAlchemyError as e:
+            flash("evidence upload fail due to file upload fail/evidence name repeat")
+            return redirect(url_for('evidence.upload'))
         return redirect(url_for('view.view'))
+    return redirect(url_for('evidence.upload'))
+
+

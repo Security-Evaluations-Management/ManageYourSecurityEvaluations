@@ -50,6 +50,15 @@
                         <p>Upload your file:</p>
                         <input type="file" name="file_upload" required><br>
                     </label>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
                 </td>
             </tr>
             <tr>
