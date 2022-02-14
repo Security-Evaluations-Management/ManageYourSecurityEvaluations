@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_login import LoginManager
 from src.models import main_db
 import os
@@ -13,6 +13,8 @@ def create_app():
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                                                            'main_db.sqlite3')
     server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    server.config['SECRET_KEY'] = os.urandom(24)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

@@ -9,7 +9,7 @@ evidence_blueprint = Blueprint('evidence', __name__)
 UPLOAD_FOLDER = 'upload_files'
 
 
-@evidence_blueprint.route('/search')
+"""@evidence_blueprint.route('/search/')
 @login_required
 def search():
     if not approve_access(current_user.role.name, 'search'):
@@ -19,12 +19,12 @@ def search():
     criteria_name_list = models.get_all_criteria_name()
 
     return render_template('search.html', employee_names=employee_name_list, project_names=project_name_list,
-                           criteria_names=criteria_name_list)
+                           criteria_names=criteria_name_list)"""
 
 
-@evidence_blueprint.route('/search', methods=['POST', 'GET'])
+@evidence_blueprint.route('/search/', methods=['GET', 'POST'])
 @login_required
-def search_post():
+def search():
     if not approve_access(current_user.role.name, 'search'):
         abort(403)
 
@@ -68,7 +68,8 @@ def search_post():
                                project_names=project_name_list, criteria_names=criteria_name_list)
 
     else:
-        page = int(request.args.get('page'))
+        page = int(request.args.get('page', 1))
+        print(page)
 
         id = session.get('id')
         criteria = session.get('criteria')

@@ -210,41 +210,27 @@ def no_filter_search_result():
 
 # get evidence by filters
 def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
+    evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.create_date_time, Evidence.last_edit_time).join(Criteria).join(User)
     if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
-        return no_filter_search_result()
+        return evidence
     else:
-        sql = "select " \
-              "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content " \
-              "from evidence join user on evidence.user_id = user.id" \
-              " join criteria on evidence.criteria_id = criteria.id where"
         if criteria_name:
-            sql += (" criteria.name=\"" + criteria_name + "\"")
+            evidence = evidence.filter(Criteria.name == criteria_name)
         if project_name:
-            if any(v is not None for v in [criteria_name]):
-                sql += " and"
-            sql += (" project_name=\"" + project_name + "\"")
+            evidence = evidence.filter(Evidence.project_name == project_name)
         if employee_name:
-            if any(v is not None for v in [criteria_name, project_name]):
-                sql += " and"
-            sql += (" user.name=\"" + employee_name + "\"")
+            evidence = evidence.filter(User.name == employee_name)
         if create_time:
             create_time = convert_date_format(create_time)
-            if any(v is not None for v in [criteria_name, project_name, employee_name]):
-                sql += " and"
-            sql += (" create_date_time between date(\"" + create_time + "\")" + " and " + "date(\"" + add_one_day(
-                create_time) + "\")")
+            evidence = evidence.filter(
+                and_(Evidence.create_date_time > create_time, Evidence.create_date_time < add_one_day(create_time)))
         if last_edit_time:
             last_edit_time = convert_date_format(last_edit_time)
-            if any(v is not None for v in [criteria_name, project_name, employee_name, create_time]):
-                sql += " and"
-            sql += (" last_edit_time between date(\"" + last_edit_time + "\")" + " and " + "date(\"" + add_one_day(
-                last_edit_time) + "\")")
+            evidence = evidence.filter(
+                and_(Evidence.last_edit_time > last_edit_time, Evidence.last_edit_time < add_one_day(last_edit_time)))
         if evidence_id:
-            if any(v is not None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time]):
-                sql += " and"
-            sql += (" evidence.id=" + evidence_id)
-        result = main_db.engine.execute(sql)
-        return result.fetchall()
+            evidence = evidence.filter(Evidence.id == evidence_id)
+        return evidence
 
 
 # get evidence info in detail through evidence id
