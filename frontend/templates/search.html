@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="/search" method="POST">
+    <form action="{{ url_for('evidence.search') }}" method="POST">
     <h3 class="title">Search Evidence</h3>
     <table>
         <tr>
@@ -74,17 +74,22 @@
             </div>
         {% endif %}
     {% endwith %}
+    </form>
 
     {% if results %}
-     <h3 class="title">Here is what we found:</h3>
-
+        {% if results.has_prev %}<a href="{{ url_for('evidence.search', page=results.prev_num) }}"> &lt;&lt; Previous </a>
+        {% else %}&lt;&lt; Previous
+        {% endif %} |
+        {% if results.has_next %}<a href="{{ url_for('evidence.search', page=results.next_num) }}">Next &gt;&gt; </a>
+        {% else %}Next &gt;&gt;
+        {% endif %}
         <table>
             <tr>
                 <th>Evidence Name</th>
                 <th>Create Time</th>
                 <th>Last Edit Time</th>
             </tr>
-            {% for evidence in results %}
+        {% for evidence in results.items %}
             <tr>
                 <td>{{ evidence.name }}</td>
                 <td>{{ evidence.create_date_time}}</td>
@@ -93,10 +98,7 @@
                     <a href="{{ url_for('view.view') }}"evidence.id>View</a>
                 </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </table>
-     {% endif %}
-
-
-    </form>
+    {% endif %}
 {% endblock %}
