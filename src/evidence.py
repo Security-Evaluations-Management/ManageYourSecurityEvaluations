@@ -5,6 +5,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from src.include.access_controller import approve_access
 import os
 
+from src.models import Evidence, main_db, Criteria
+
 evidence_blueprint = Blueprint('evidence', __name__)
 UPLOAD_FOLDER = 'upload_files'
 
@@ -22,9 +24,10 @@ def search():
                            criteria_names=criteria_name_list)
 
 
-@evidence_blueprint.route('/search', methods=['POST'])
+@evidence_blueprint.route('/search', methods=['POST','GET'])
 @login_required
 def search_post():
+
     if not approve_access(current_user.role.name, 'search'):
         abort(403)
 
@@ -53,19 +56,24 @@ def search_post():
     if len(last_edit_time) == 0:
         last_edit_time = None
 
-    results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
+    results= models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
 
     employee_name_list = models.users_name()
     project_name_list = models.projects_name()
     criteria_name_list = models.get_all_criteria_name()
 
-    if not results:
-        flash('No result found.')
-        return redirect(url_for('evidence.search'))
+    page = request.args.get('page', 1, type=int)
 
-    else:
-        return render_template('search.html', results=results, employee_names=employee_name_list,
+    #if not results:
+       # flash('No result found.')
+       # return redirect(url_for('evidence.search'))
+
+    # else:
+    list = results.paginate(page=page,per_page=10,error_out=False)
+        #evidence = results.paginate(1, 10, error_out=False)
+    return render_template('search.html', results=list,employee_names=employee_name_list,
                                project_names=project_name_list, criteria_names=criteria_name_list)
+
 
 
 @evidence_blueprint.route('/upload')
