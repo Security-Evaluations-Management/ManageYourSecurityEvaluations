@@ -1,21 +1,33 @@
 body {
-  background-image: url('../images/Welcome.jpg');
+  background-image: url('../images/welcome1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
 }
 
-
-
 h1{
      font-family: "Helvetica", Sans-Serif;
      font-size: xx-large;
-     color: #DD8627;
+     color: #f8cc03;
      margin:10px;
      position: absolute;
      right: 60px;
-     top: 350px;
+     top: 250px;
 }
-a{
-    color: white;
+.welcome_login{
+
+    background-color: #f1d308;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: none;
+    text-decoration-color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    position: absolute;
+    right: 60px;
+    top: 350px;
 }

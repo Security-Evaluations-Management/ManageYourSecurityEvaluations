@@ -11,9 +11,10 @@
 
 {% block content %}
     {% if not current_user.is_authenticated %}
-            <h1>Welcome to Manage Your Security Evaluations, <a href="{{ url_for('auth.login') }}">Click to login</a></h1
+            <h1>Manage Your Security Evaluations</h1>
+        <div class = 'welcome_login'><a href="{{ url_for('auth.login') }}">Login</a></div>
     {% elif current_user.is_authenticated %}
-        <h1>Welcome to Manage Your Security Evaluations, {{ current_user.name }}!</h1>
+        <h1>Welcome, {{ current_user.name }}!</h1>
         <form action="/update" method="POST">
             <table id="user_profile">
                 <tr>
