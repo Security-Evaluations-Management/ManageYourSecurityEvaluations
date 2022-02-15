@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('evidence.search') }}" method="POST">
+    <form action="{{ url_for('evidence.search_post') }}" method="POST">
     <h3 class="title">Search Evidence</h3>
     <table>
         <tr>
@@ -66,21 +66,21 @@
             </td>
         </tr>
     </table>
-
-    {% with message = get_flashed_messages() %}
+        {% with message = get_flashed_messages() %}
         {% if message %}
             <div>
                 {{ message[0] }}
             </div>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
+
     </form>
 
     {% if results %}
-        {% if results.has_prev %}<a href="{{ url_for('evidence.search', page=results.prev_num) }}"> &lt;&lt; Previous </a>
+        {% if results.has_prev %}<a href="{{ url_for('evidence.search_post', page=results.prev_num) }}"> &lt;&lt; Previous </a>
         {% else %}&lt;&lt; Previous
         {% endif %} |
-        {% if results.has_next %}<a href="{{ url_for('evidence.search', page=results.next_num) }}">Next &gt;&gt; </a>
+        {% if results.has_next %}<a href="{{ url_for('evidence.search_post', page=results.next_num) }}">Next &gt;&gt; </a>
         {% else %}Next &gt;&gt;
         {% endif %}
         <table>
