@@ -1,8 +1,8 @@
 *{
-    font-family: "Roboto", serif;
+    font-family: "Helvetica", Sans-Serif;
 }
 header{
-    background-color: #E91C24;
+    background-color: #699FA1;
     height: 60px;
     background-size: cover;
     background-position: center;
@@ -33,20 +33,20 @@ ul[id="navigation_bar"] li a{
 
 ul[id="navigation_bar"] li a:hover{
     background-color: white;
-    color: #E91C24;
+    color: #699FA1;
 }
 
 
 ul[id="navigation_bar"] li.home a{
     background-color: white;
-    color: #E91C24;
+    color: #699FA1;
 }
 
 footer{
     position:absolute;
     bottom:0;
     width:100%;
-    background-color: #E91C24;
+    background-color: #699FA1;
     color: white;
 }
 

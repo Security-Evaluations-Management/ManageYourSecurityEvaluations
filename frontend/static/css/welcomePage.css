@@ -1,0 +1,21 @@
+body {
+  background-image: url('../images/Welcome.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+
+h1{
+     font-family: "Helvetica", Sans-Serif;
+     font-size: xx-large;
+     color: #DD8627;
+     margin:10px;
+     position: absolute;
+     right: 60px;
+     top: 350px;
+}
+a{
+    color: white;
+}
