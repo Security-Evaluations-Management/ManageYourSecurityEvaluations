@@ -11,61 +11,47 @@
 {% block content %}
     <h3 class="title">Upload Evidence</h3>
      <form action="/upload" method="POST" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td>
-                    <label>Evidence name: </label>
-                    <input type="text" name="ev_name" placeholder="evidence name" required autofocus=""><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Project name: </label>
-                    <input type="text" name="proj_name" placeholder="project name" required><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Description:</label>
-                    <p>
-                        <textarea name="description" cols="20" rows="5" wrap="soft"> </textarea>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Choose criteria for your evidence from the list:</label>
-                    <p>
-                        <select name="criteria" id="lang" size="8">
-                        {% for criteria in criteria_list %}
-                            <option value= {{ criteria.id  }}>{{ criteria.name }}</option>
-                        {% endfor %}}
-                    </select>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>
-                        <p>Upload your file:</p>
-                        <input type="file" name="file_upload" required><br>
-                    </label>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            <ul class=flashes>
-                            {% for message in messages %}
-                                <li>{{ message }}</li>
-                            {% endfor %}
-                            </ul>
-                        {% endif %}
-                    {% endwith %}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Submit">
-                </td>
-            </tr>
-        </table>
+         <div>
+            <label>Evidence name: </label>
+            <input type="text" name="ev_name" placeholder="evidence name" required autofocus=""><br>
+         </div>
+         <div>
+             <label>Project name: </label>
+             <input type="text" name="proj_name" placeholder="project name" required><br>
+         </div>
+         <div>
+             <label>Description:</label>
+             <textarea name="description" cols="20" rows="5" wrap="soft"> </textarea>
+         </div>
+         <div>
+             <label>Choose criteria for your evidence from the list:</label>
+             <p>
+                 <select name="criteria" id="lang" size="8">
+                     {% for criteria in criteria_list %}
+                     <option value= {{ criteria.id  }}>{{ criteria.name }}</option>
+                     {% endfor %}}
+                 </select>
+             </p>
+         </div>
+         <div>
+             <label>Upload your file:</label>
+             <p>
+                 <input type="file" name="file_upload" required><br>
+             </p>
+         </div>
+         <div>
+             {% with messages = get_flashed_messages() %}
+             {% if messages %}
+             <ul class=flashes>
+                 {% for message in messages %}
+                 <li>{{ message }}</li>
+                 {% endfor %}
+             </ul>
+             {% endif %}
+             {% endwith %}
+         </div>
+         <div>
+             <input type="submit" value="Submit">
+         </div>
     </form>
 {% endblock %}
