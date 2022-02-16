@@ -115,7 +115,6 @@ def upload_post():
     description = request.form.get('description')
     criteria_id = request.form.get('criteria')
     file = request.files.get('file_upload')
-    upload_error = False
 
     file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER)
     if not os.path.exists(file_dir):
