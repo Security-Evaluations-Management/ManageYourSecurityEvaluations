@@ -10,11 +10,15 @@
 
 {% block content %}
     {% if not current_user.is_authenticated %}
+        <div class="pre_login">
+        </div>
         <h1>Manage Your Security Evaluations</h1>
         <div class = 'welcome_login'>
             <a href="{{ url_for('auth.login') }}">Login</a>
         </div>
     {% elif current_user.is_authenticated %}
+        <div class="after_login">
+        </div>
         <h2>Welcome, {{ current_user.name }}!</h2>
         <form action="/update" method="POST">
             <div>
@@ -38,6 +42,7 @@
                 <input type="password" name="password" placeholder="Password"><br>
             </div>
             <div>
+                <label class="attribute"></label>
                 <input type="submit" name="action" value="Update"/>
             </div>
         </form>
