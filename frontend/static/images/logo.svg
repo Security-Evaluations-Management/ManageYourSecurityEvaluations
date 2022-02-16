@@ -20,12 +20,12 @@
 <defs/>
 <g id="图层-1" vectornator:layerName="图层 1">
 <path d="M1376.73 283.847C1371.73 280.18 1361.11 266.677 1361.73 272.847C1362.61 281.603 1372.4 286.847 1377.73 293.847" fill="none" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
-<path d="M464.138 150L120 293L464.138 150Z" fill="#ff9765" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M440.833 150L579.514 196.313L579.861 230L643.894 217.812L760.783 256.848L762.561 855.535L804.399 847.152L804.527 271.456L890 300L890 830L644.749 879.141L579.861 846.402L579.797 892.156L440.833 920L440.833 150L440.833 150Z" fill="#ff844b" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M419.438 150L120 290L120 390L420 320L419.438 150Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M420 410C420 410 120 460 120 460L120 550L419.812 579.969L420 410Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M419.812 579.969L420 580L419.812 579.969Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M120 620L120 760L419.438 920L420 670L120 620Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
-<path d="M579.843 229.006L579.861 846.595L645.154 880L644.256 217.933L579.843 229.006Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M456.932 20L10 205.678L456.932 20Z" fill="#ff9765" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M426.667 20L606.772 80.1345L607.222 123.876L690.382 108.051L842.185 158.736L844.495 936.098L898.83 925.213L898.996 177.704L1010 214.767L1010 902.942L691.492 966.749L607.222 924.239L607.14 983.648L426.667 1019.8L426.667 20L426.667 20Z" fill="#ff844b" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M398.88 20L10 201.782L10 331.627L399.61 240.736L398.88 20Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M399.61 357.595C399.61 357.595 10.0001 422.518 10 422.518L10 539.378L399.367 578.29L399.61 357.595Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M399.367 578.29L399.61 578.331L399.367 578.29Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M10 630.269L10 812.051L398.88 1019.8L399.205 708.094L10 630.269Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
+<path d="M607.198 122.585L607.222 924.49L692.018 967.864L690.852 108.208L607.198 122.585Z" fill="#4c61ab" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0" stroke-width="10"/>
 </g>
 </svg>
