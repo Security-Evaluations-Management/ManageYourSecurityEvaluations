@@ -5,11 +5,71 @@
 {% endblock %}
 
 {% block page_title %}
-    <title>View [EVIDENCE NAME HERE]</title>
+    <title>View Evidence</title>
 {% endblock %}
 
 {% block content %}
-    <p>
-        {{ content }}
-    </p>
+    <h3 class="title">View Evidence</h3>
+    <form action="/update_evidence" method="POST" enctype="multipart/form-data">
+        <table id="evidence_info">
+            <tr>
+                <td>Evidence ID:</td>
+                <td>
+                    <input type="text" name="evidence_id" value="{{ evidence.id }}" readonly/>
+                </td>
+            </tr>
+            <tr>
+                <td>Evidence Name:</td>
+                <td><b>{{ evidence.name }}</b></td>
+            </tr>
+            <tr>
+                <td>Creator:</td>
+                <td><b>{{ creator.name }}</b></td>
+            </tr>
+            <tr>
+                <td>Create Date:</td>
+                <td><b>{{ evidence.create_date_time }}</b></td>
+            </tr>
+            <tr>
+                <td>Last Edit Time:</td>
+                <td><b>{{ evidence.last_edit_time }}</b></td>
+            </tr>
+            <tr>
+                <td>Project Name:</td>
+                <td><b>{{ evidence.project_name }}</b></td>
+            </tr>
+            <tr>
+                <td>Criteria:</td>
+                <td><b>{{ linked_criteria.name }}</b></td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>
+                    <textarea name="description">{{ evidence.description }}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Current Content:</td>
+                <td><b>{{ evidence.content }}</b></td>
+            </tr>
+            <tr>
+                <td>To replace the content:</td>
+                <td>
+                    <input type="file" name="file_upload">
+                </td>
+            </tr>
+        </table>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <input type="submit" value="Submit Changes">
+    </form>
 {% endblock %}

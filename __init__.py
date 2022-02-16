@@ -35,9 +35,6 @@ def create_app():
     from .src.main import main_blueprint
     server.register_blueprint(main_blueprint)
 
-    from .src.view import view_blueprint
-    server.register_blueprint(view_blueprint)
-
     from .src.evidence import evidence_blueprint
     server.register_blueprint(evidence_blueprint)
 
