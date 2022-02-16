@@ -14,15 +14,21 @@
         {% endif %}
     {% endwith %}
     <form action="/login" method="POST">
-        <label>
+        <div>
+            <label> E-mail: </label>
             <input type="email" name="email" placeholder="Email" autofocus=""><br>
-        </label>
-        <label>
+        </div>
+        <div>
+            <label> Password: </label>
             <input type="password" name="password" placeholder="Password"><br>
-        </label>
-        <label>
+        </div>
+        <div>
+            <label></label>
             <input type="checkbox" name="remember"> Remember me<br>
-        </label>
-        <button>Login</button>
+        </div>
+        <div>
+            <label></label>
+            <button>Login</button>
+        </div>
     </form>
 {% endblock %}

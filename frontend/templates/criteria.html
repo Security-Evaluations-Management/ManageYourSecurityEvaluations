@@ -13,14 +13,21 @@
         <h3 class="title">Add New Criteria</h3>
 
         <form action="/criteria/creation" method="POST" enctype="multipart/form-data">
-            <label>Criteria Name: </label>
+            <div>
+                <label>Criteria Name: </label>
                 <input type="text" name="criteria_name" placeholder="criteria name" autofocus=""><br>
-            <label>Criteria Description</label>
+            </div>
+            <div>
+                 <label>Criteria Description</label>
                 <input type="text" name="description" autofocus=""><br>
-            <label> Upload criteria file:
+            </div>
+            <div>
+                <label> Upload criteria file:</label>
                 <input type="file", name="criteria_file"><br>
-            </label>
-            <input type="submit" name="action" value="Submit"/>
+            </div>
+            <div>
+                <input type="submit" name="action" value="Submit"/>
+            </div>
         </form>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
