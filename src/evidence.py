@@ -62,7 +62,7 @@ def search_post():
         session['ledit_time'] = last_edit_time
 
         results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
-        result_list = results.paginate(page=1, per_page=10, error_out=False)
+        result_list = results.paginate(page=1, per_page=3, error_out=False)
 
         if result_list.total == 0 :
             flash('No result found.')
@@ -86,7 +86,7 @@ def search_post():
         last_edit_time = session.get('ledit_time')
 
         results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
-        result_list = results.paginate(page=page, per_page=10, error_out=False)
+        result_list = results.paginate(page=page, per_page=3, error_out=False)
         return render_template('search.html', results=result_list, employee_names=employee_name_list,
                                project_names=project_name_list, criteria_names=criteria_name_list)
 
