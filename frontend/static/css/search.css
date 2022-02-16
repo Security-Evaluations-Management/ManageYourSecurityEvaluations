@@ -1,4 +1,9 @@
-html {
+ul[id="navigation_bar"] li.search a{
+    color: #FF844B;
+    border-bottom-color: #FF844B;
+}
+
+.body-content {
   font-size: 15px;
   font-family: 'Open Sans', sans-serif;
 }
@@ -9,7 +14,7 @@ h3 {
   font-size: 20px;
   font-weight: bold;
   height: 24px;
-  width: 760px;
+  width: 100%;
   margin: 0 auto;
   line-height: 20px;
   text-align: left;

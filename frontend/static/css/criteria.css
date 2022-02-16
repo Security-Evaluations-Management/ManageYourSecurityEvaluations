@@ -33,7 +33,6 @@ form{
 
 table {
   display: grid;
-
 }
 
 th {
@@ -47,22 +46,19 @@ td{
   padding-left: 10px;
 }
 
-input{
-
-}
-
 label {
+  display: inline-block;
   width: 150px;
   vertical-align: top;
   text-align: right;
 }
 
-input:focus, textarea:focus {
+input.text:focus, textarea:focus {
   background   : rgba(0,0,0,.1);
   border-radius: 5px;
 }
 
-input[type=text], textarea {
+input.text{
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -99,4 +95,9 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background: #bfcdff;
+}
+
+input.id {
+  width: 10px;
+  border-color: transparent;
 }

@@ -25,19 +25,15 @@
          </div>
          <div>
              <label>Choose criteria for your evidence from the list:</label>
-             <p>
-                 <select name="criteria" id="lang" size="8">
-                     {% for criteria in criteria_list %}
-                     <option value= {{ criteria.id  }}>{{ criteria.name }}</option>
-                     {% endfor %}}
-                 </select>
-             </p>
+             <select name="criteria" id="lang" size="8">
+                 {% for criteria in criteria_list %}
+                 <option value= {{ criteria.id  }}>{{ criteria.name }}</option>
+                 {% endfor %}}
+             </select>
          </div>
          <div>
              <label>Upload your file:</label>
-             <p>
-                 <input type="file" name="file_upload" required><br>
-             </p>
+             <input type="file" name="file_upload" required><br>
          </div>
          <div>
              {% with messages = get_flashed_messages() %}
@@ -51,6 +47,7 @@
              {% endwith %}
          </div>
          <div>
+             <label></label>
              <input type="submit" value="Submit">
          </div>
     </form>
