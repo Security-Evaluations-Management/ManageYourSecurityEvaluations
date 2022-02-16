@@ -1,13 +1,23 @@
+.pre_login {
+    position: absolute;
+    background-size: 100%;
+    background: url('../images/welcome4.jpg') no-repeat right;
+    width: 80%;
+    height: 90%;
+}
 
-body {
-    background-image: url('../images/welcome4.jpg');
-    background-repeat: no-repeat;
-    background-position: left;
-    background-attachment: fixed;
-    background-size:80% auto;
+.after_login{
+    z-index: -1;
+    position: absolute;
+    background-size: 100%;
+    width: 100%;
+    height: 90%;
+    background: url('../images/welcome4.jpg') no-repeat center;
+}
 
-
->>>>>>> 55cd6267d85c46f3dcb86e9785bc8c90fb52c023
+ul[id="navigation_bar"] {
+    float: right;
+    margin: 0px 20px 20px auto;
 }
 
 h1{
