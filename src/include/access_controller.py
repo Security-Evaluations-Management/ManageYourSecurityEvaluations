@@ -5,16 +5,21 @@ def approve_access(role, action):
             'search': True,
             'admin': True,
             'criteria': True,
-            'criteria_modification': True
+            'criteria_modification': True,
+            'view': True,
+            'update_evidence': True
         },
         'DEV': {
             'upload': True,
             'search': True,
-            'criteria': True
+            'criteria': True,
+            'view': True,
+            'update_evidence': True
         },
         'QA': {
             'search': True,
-            'criteria': True
+            'criteria': True,
+            'view': True
         },
         'User': {
         }

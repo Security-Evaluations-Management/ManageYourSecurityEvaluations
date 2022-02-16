@@ -210,7 +210,8 @@ def no_filter_search_result():
 
 # get evidence by filters
 def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
-    evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.create_date_time, Evidence.last_edit_time).join(Criteria).join(User)
+    evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.create_date_time,
+                                     Evidence.last_edit_time).join(Criteria).join(User)
     if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
         return evidence
     else:
@@ -245,8 +246,14 @@ def get_evidence_by_id(evidence_id):
 
 
 # update evidence content
-def update_evidence(evidence_id, new_content):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(content=new_content)
+def update_evidence(evidence_id, new_description):
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description)
+    main_db.engine.execute(stmt)
+
+
+# update evidence content
+def update_evidence_with_file(evidence_id, new_description, contents):
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, contents=contents)
     main_db.engine.execute(stmt)
 
 
@@ -258,3 +265,13 @@ def convert_date_format(date):
 # add one more day for given date string, which format is yyyy-mm-dd
 def add_one_day(date):
     return (datetime.strptime(date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+
+
+def get_criteria_by_id(criteria_id):
+    criteria = Criteria.query.filter_by(id=criteria_id).first()
+    return criteria
+
+
+def get_user_by_id(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    return user

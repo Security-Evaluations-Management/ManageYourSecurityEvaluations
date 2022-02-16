@@ -64,14 +64,14 @@ def search_post():
         results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
         result_list = results.paginate(page=1, per_page=8, error_out=False)
 
-        if result_list.total == 0 :
+        if result_list.total == 0:
             flash('No result found.')
             return redirect(url_for('evidence.search'))
 
         else:
 
             return render_template('search.html', results=result_list, employee_names=employee_name_list,
-                               project_names=project_name_list, criteria_names=criteria_name_list)
+                                   project_names=project_name_list, criteria_names=criteria_name_list)
 
 
 
@@ -133,7 +133,48 @@ def upload_post():
         except SQLAlchemyError as e:
             flash("evidence upload fail due to file upload fail/evidence name repeat")
             return redirect(url_for('evidence.upload'))
-        return redirect(url_for('view.view'))
+        # return redirect(url_for('evidence.view', evidence_id=evidence_id))
     return redirect(url_for('evidence.upload'))
 
 
+@evidence_blueprint.route('/view', methods=['GET'])
+@login_required
+def view():
+    if not approve_access(current_user.role.name, 'view'):
+        abort(403)
+    evidence_id = request.args.get("evidence_id")
+    evidence = models.get_evidence_info(evidence_id)
+    linked_criteria = models.get_criteria_by_id(evidence['criteria_id'])
+    creator = models.get_user_by_id(evidence['user_id'])
+
+    return render_template('view.html', evidence=evidence, linked_criteria=linked_criteria, creator=creator)
+
+
+@evidence_blueprint.route('/update_evidence', methods=['POST'])
+@login_required
+def update_evidence():
+    if not approve_access(current_user.role.name, 'update_evidence'):
+        abort(403)
+
+    evidence_id = request.form.get("evidence_id")
+    new_description = request.form.get("description")
+    file = request.files.get('file_upload')
+
+    file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER)
+    if not os.path.exists(file_dir):
+        os.makedirs(file_dir)
+
+    if file:
+        file_path = os.path.join(file_dir, file.filename)
+        file.save(file_path)
+        f = open(file_path, 'r')
+        contents = f.read()
+        if not contents:
+            contents = " "
+        try:
+            models.update_evidence_with_file(evidence_id, new_description, contents)
+        except SQLAlchemyError as e:
+            flash("evidence upload fail due to file upload fail/evidence name repeat")
+    else:
+        models.update_evidence(evidence_id, new_description)
+    return redirect(url_for('evidence.view', evidence_id=evidence_id))
