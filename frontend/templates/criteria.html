@@ -45,26 +45,25 @@
     {% else %}
 
         <h3 class="title">Criteria List</h3>
-        <div class="criteria-result">
+
             <ul class = "criteria-list-table">
             <li class = "list-header">
-                <div class = "col col-1">ID</div>
-                <div class = "col col-2">Name</div>
-                <div class = "col col-3">Description</div>
-                <div class = "col col-4">Creator</div>
-                <div class = "col col-5"></div>
+                <div class = "col col-1" data-label="id">ID</div>
+                <div class = "col col-2" data-label="name">Name</div>
+                <div class = "col col-3" data-label="description">Description</div>
+                <div class = "col col-4" data-label="user">Creator</div>
+                <div class = "col col-5" data-label="delete"></div>
             </li>
            <form action="/criteria/delete" method="POST">
             {% for criteria in criteria_list %}
-
                 <li class = "list-row">
-                        <div class = "col col-1">
+                        <div class = "col col-1" data-label="id">
                         <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
                         </div>
-                        <div class = "col col-2">{{ criteria.name }}</div>
-                        <div class = "col col-3">{{ criteria.description }}</div>
-                        <div class = "col col-4">{{ criteria.user.name }}</div>
-                        <div class = "col col-5">
+                        <div class = "col col-2" data-label="name">{{ criteria.name }}</div>
+                        <div class = "col col-3" data-label="description">{{ criteria.description }}</div>
+                        <div class = "col col-4" data-label="user">{{ criteria.user.name }}</div>
+                        <div class = "col col-5" data-label="delete">
                             {% if allow_modification %}
                                 <input type="submit" name="action" value="Delete"/>
                             {% else %}
@@ -72,11 +71,9 @@
                             {% endif %}
                         </div>
                   </li>
-
                 </form>
-
             {% endfor %}
         </ul>
-        </div>
+
     {% endif %}
 {% endblock %}
