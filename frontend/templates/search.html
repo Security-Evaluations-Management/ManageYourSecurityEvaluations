@@ -9,10 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <form class = search-bar action="{{ url_for('evidence.search_post') }}" method="POST">
     <h3 class="title">Search Evidence</h3>
-
-
+    <form class = search-bar action="{{ url_for('evidence.search_post') }}" method="POST">
             <div>
                 <label>ID:</label>
                 <input type="text" id="id" name="id" placeholder="e.g 0001" pattern="[0-9]{4}">
