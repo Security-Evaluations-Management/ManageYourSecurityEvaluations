@@ -15,47 +15,40 @@
 
             <div>
                 <label>ID:</label>
-                <p><input type="text" id="id" name="id" placeholder="e.g 0001" pattern="[0-9]{4}"></p>
+                <input type="text" id="id" name="id" placeholder="e.g 0001" pattern="[0-9]{4}">
             </div>
 
             <div>
                 <label>Criteria:</label>
-                <p><select name="criteria" id="criteria">
+                <select name="criteria" id="criteria">
                 <option value="" selected = "selected">Select criteria</option>
                 {% for criteria_name in criteria_names %}
                     <option value="{{ criteria_name }}" >{{ criteria_name }}</option>
                 {% endfor %}
-                </select></p>
-            </div>
+                </select>
 
-
-            <div>
                 <label>Project:</label>
-                <p><select name="project" id="project">
+                <select name="project" id="project">
                 <option value="" selected = "selected">Select project</option>
                     {% for project_name in project_names %}
                     <option value="{{ project_name }}">{{ project_name }}</option>
                 {% endfor %}
-                </select></p>
-            </div>
+                </select>
 
-            <div>
                 <label>Employee Name:</label>
-            <p><select name="employee_name"  id="employee_name">
+            <select name="employee_name"  id="employee_name">
                 <option value="" selected = "selected">Select employee name</option>
                     {% for employee_name in employee_names %}
                     <option value="{{ employee_name }}">{{ employee_name }}</option>
                 {% endfor %}
-            </select></p>
+            </select>
             </div>
 
             <div>
                 <label>Create Time:</label>
-                <p><input type="text" id="create_time" name="create_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$"></p>
-            </div>
-            <div>
+                <input type="text" id="create_time" name="create_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
                 <label>Last Edit Time:</label>
-                <p><input type="text" id="ledit_time" name="ledit_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$"></p>
+                <input type="text" id="ledit_time" name="ledit_time" placeholder="yyyy/mm/dd" pattern="^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
             </div>
             <input type="submit" name="action" value="Search"/>
 
@@ -70,29 +63,34 @@
 
 
     {% if results %}
-        <table>
-            <tr>
-                <th>Evidence Name</th>
-                <th>Create Time</th>
-                <th>Last Edit Time</th>
-            </tr>
+       <div class = "result-table">
+        <ul class = "responsive-table">
+            <li class = "table-header">
+                <div class="col col-1 ">ID</div>
+                <div class="col col-2 ">Name</div>
+                <div class="col col-3 ">Last Edit Time</div>
+                <div class="col col-4 "></div>
+            </li>
+
         {% for evidence in results.items %}
-            <tr>
-                <td>{{ evidence.name }}</td>
-                <td>{{ evidence.create_date_time}}</td>
-                <td>{{ evidence.last_edit_time }}</td>
-                <td>
-                <div class = "view"><a href="{{ url_for('view.view') }}"evidence.id>View</a></div>
-                </td>
-            </tr>
+            <li class = "table-row">
+                <div class = "col col-1">{{ evidence.id}}</div>
+                <div class = "col col-2">{{ evidence.name }}</div>
+                <div class = "col col-3">{{ evidence.last_edit_time}}</div>
+                <div class = "col col-4"><a href="{{ url_for('view.view') }}"evidence.id>View</a></div>
+
+            </li>
         {% endfor %}
-        </table>
+         </ul>
+        </div>
         <div class = "pagination">
             {% if results.has_prev %}<a href="{{ url_for('evidence.search_post', page=results.prev_num) }}"> &lt;&lt; Previous </a>
             {% endif %}
             {% if results.has_next %}<a href="{{ url_for('evidence.search_post', page=results.next_num) }}">Next &gt;&gt; </a>
             {% endif %}
         </div>
+
     {% endif %}
+
     </form>
 {% endblock %}

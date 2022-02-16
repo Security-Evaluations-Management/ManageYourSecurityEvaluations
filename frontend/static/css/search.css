@@ -26,7 +26,7 @@ select{
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    padding: 5px 20px 5px 15px;
+    padding: 5px 10px 5px 10px;
     background: white;
     box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
     -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
@@ -72,11 +72,10 @@ option:hover {
 }
 
 
-
 label {
   width: 150px;
-  vertical-align: top;
-  text-align: right;
+  vertical-align: center;
+  text-align: center;
 }
 
 input:focus, textarea:focus {
@@ -88,7 +87,7 @@ input[type=text], textarea {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  padding: 5px 20px 5px 15px;
+  padding: 5px 10px 5px 10px;
   border: 1px solid #b7b7b7;
   -webkit-border-radius: 7px;
   border-radius: 7px;
@@ -157,6 +156,7 @@ input[type=submit]:hover {
   transition: background-color .3s;
   background: #677bc5;
   text-align: center;
+  border-radius: 7px;
 
 }
 .view a.active {
@@ -175,3 +175,68 @@ input[type=submit]:hover {
 .view {
   display: inline-block;
 }
+.result-table{
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+  li {
+    border-radius: 3px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .table-header {
+    background-color: #95a5a6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  }
+  .col-1 {
+    flex-basis: 10%;
+  }
+  .col-2 {
+    flex-basis: 20%;
+  }
+  .col-3 {
+    flex-basis: 60%;
+  }
+  .col-4 {
+    flex-basis: 25%;
+  }
+
+  @media all and (max-width: 567px) {
+    .table-header {
+      display: none;
+    }
+    .table-row {
+    }
+    li {
+      display: block;
+    }
+    .col {
+      flex-basis: 70%;
+    }
+    .col {
+      display: flex;
+      padding: 5px 0;
+    }
+    col:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+  }
+
+
+
+
