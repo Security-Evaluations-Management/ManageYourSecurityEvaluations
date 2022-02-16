@@ -15,17 +15,18 @@
         <form action="/criteria/creation" method="POST" enctype="multipart/form-data">
             <div>
                 <label>Criteria Name: </label>
-                <input type="text" name="criteria_name" placeholder="criteria name" autofocus=""><br>
+                <input class="text" type="text" name="criteria_name" placeholder="criteria name" autofocus=""><br>
             </div>
             <div>
-                 <label>Criteria Description</label>
-                <input type="text" name="description" autofocus=""><br>
+                 <label>Criteria Description: </label>
+                <input class="text" type="text" name="description" autofocus=""><br>
             </div>
             <div>
                 <label> Upload criteria file:</label>
                 <input type="file", name="criteria_file"><br>
             </div>
             <div>
+                <label></label>
                 <input type="submit" name="action" value="Submit"/>
             </div>
         </form>
@@ -57,7 +58,7 @@
                     <tr>
                         <td>
                             <label>
-                                <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
+                                <input class="id" type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
                             </label>
                         </td>
                         <td>{{ criteria.name }}</td>
