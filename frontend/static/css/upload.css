@@ -86,4 +86,42 @@ input[type=submit]:hover {
 }
 
 
+select{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 5px 20px 5px 15px;
+    background: white;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    cursor: pointer;
+    color: rgba(96,96,96,1);
+    font: normal 15px/normal Arial, Helvetica, sans-serif;
+    border: 1px solid #b7b7b7;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+
+}
+
+option{
+     color: #223254;
+   }
+
+option[value=""][disabled]{
+    display: none;
+      }
+
+
+option:focus{
+   outline: none;
+   border-color: #0077FF;
+   box-shadow: 0 0 0 2px;
+   rgba(#0077FF,.2);
+       }
+
+
+option:hover {
+    stroke: #0077FF;
+    }
+
 
