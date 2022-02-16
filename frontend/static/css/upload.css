@@ -1,6 +1,6 @@
-html {
-  font-size: 15px;
-  font-family: 'Open Sans', sans-serif;
+ul[id="navigation_bar"] li.upload a{
+    color: #FF844B;
+    border-bottom-color: #FF844B;
 }
 
 h3 {
@@ -9,7 +9,7 @@ h3 {
   font-size: 20px;
   font-weight: bold;
   height: 24px;
-  width: 760px;
+  width: 100%;
   margin: 0 auto;
   line-height: 20px;
   text-align: left;
@@ -23,8 +23,8 @@ div, p {
 
 form{
   position: relative;
-  width: 760px;
-  height : 580px;
+  width: 500px;
+  height : 400px;
   margin : 0 auto;
   padding: 1em;
   box-sizing: border-box;

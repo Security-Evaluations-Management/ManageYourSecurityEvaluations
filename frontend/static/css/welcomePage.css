@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/welcome3.jpg');
+    background-image: url('../images/welcome4.jpg');
     background-repeat: no-repeat;
     background-position: left;
     background-attachment: fixed;
@@ -7,17 +7,18 @@ body {
 }
 
 h1{
-     font-family: "Helvetica", Sans-Serif;
-     font-size: xx-large;
-     color: #f8cc03;
-     margin:10px;
-     position: absolute;
-     right: 60px;
-     top: 250px;
+    position: absolute;
+    left:85%;
+    top: 30%;
+    width: 200px;
+    font-family: "Helvetica", Sans-Serif;
+    font-size: xx-large;
+    color: #FF844B;
 }
-.welcome_login{
 
-    background-color: #f1d308;
+.welcome_login{
+    margin-right: 0px;
+    background-color: #FF844B;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -29,6 +30,89 @@ h1{
     font-size: 16px;
     border-radius: 8px;
     position: absolute;
-    right: 60px;
-    top: 350px;
+    left: 85%;
+    top: 50%;
+}
+
+ul[id="navigation_bar"] li.home a{
+    color: #FF844B;
+    border-bottom-color: #FF844B;
+}
+
+h2{
+    color: white;
+    font-size: large;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+div{
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+form{
+    padding: 50px;
+    width: 500px;
+    height : 380px;
+    margin : 0 auto;
+    box-sizing: border-box;
+    background : rgba(0,0,0,.4);
+}
+
+label {
+    color: white;
+}
+
+label.attribute, label.title{
+    font-weight: bolder;
+}
+
+p {
+    color: white;
+}
+
+input:focus, textarea:focus {
+  background   : rgba(0,0,0,.1);
+  border-radius: 5px;
+}
+
+input[type=text], input[type=password], textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 5px 20px 5px 15px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  font: normal 15px/normal Arial, Helvetica, sans-serif;
+  color: rgba(96,96,96,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(255,255,255,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+input[type=submit] {
+  width: 80px;
+  height: 30px;
+  border: transparent;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  background: #FF844B;
+  text-align: center;
+}
+
+input[type=submit]:hover {
+  background: #FFB999;
 }

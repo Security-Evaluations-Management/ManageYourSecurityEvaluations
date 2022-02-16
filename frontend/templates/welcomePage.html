@@ -8,44 +8,38 @@
     <title>Welcome to Manage Your Security Evaluations</title>
 {% endblock %}
 
-
 {% block content %}
     {% if not current_user.is_authenticated %}
-            <h1>Manage Your Security Evaluations</h1>
-        <div class = 'welcome_login'><a href="{{ url_for('auth.login') }}">Login</a></div>
+        <h1>Manage Your Security Evaluations</h1>
+        <div class = 'welcome_login'>
+            <a href="{{ url_for('auth.login') }}">Login</a>
+        </div>
     {% elif current_user.is_authenticated %}
-        <h1>Welcome, {{ current_user.name }}!</h1>
+        <h2>Welcome, {{ current_user.name }}!</h2>
         <form action="/update" method="POST">
-            <table id="user_profile">
-                <tr>
-                    <th colspan="2">Your Profile:</th>
-                </tr>
-                <tr>
-                    <td><b>Name: </b></td>
-                    <td>
-                        <label>
-                            <input type="text" name="name" value="{{ current_user.name }}"/>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>Email: </b></td>
-                    <td>{{ current_user.email }}</td>
-                </tr>
-                <tr>
-                    <td><b>Role: </b></td>
-                    <td>{{ current_user.role.name }}</td>
-                </tr>
-                <tr>
-                    <td><b>New Password:</b></td>
-                    <td>
-                        <label>
-                            <input type="password" name="password" placeholder="Password"><br>
-                        </label>
-                    </td>
-                </tr>
-            </table>
-            <input type="submit" name="action" value="Update"/>
+            <div>
+                <label class="title">Your Profile</label>
+
+            </div>
+            <div>
+                <label class="attribute">Name: </label>
+                <input type="text" name="name" value="{{ current_user.name }}"/>
+            </div>
+            <div>
+                <label class="attribute">Email: </label>
+                <label>{{ current_user.email }}</label>
+            </div>
+            <div>
+                <label class="attribute">Role:</label>
+                <label>{{ current_user.role.name }}</label>
+            </div>
+            <div>
+                <label class="attribute">New Password:</label>
+                <input type="password" name="password" placeholder="Password"><br>
+            </div>
+            <div>
+                <input type="submit" name="action" value="Update"/>
+            </div>
         </form>
 
         <div>

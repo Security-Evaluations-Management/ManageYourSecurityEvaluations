@@ -1,23 +1,37 @@
 *{
     font-family: "Helvetica", Sans-Serif;
 }
+
 header{
-    background-color: #699FA1;
+    width: 100%;
     height: 60px;
+    top: 0;
+    position: fixed;
     background-size: cover;
-    background-position: center;
+    background: rgba(0, 0, 0, .4);
 }
 
 .logo img{
+    position: relative;
+    top: -20px;
+    right: -10px;
     float: left;
     height: 40px;
     width: auto;
-    margin: 10px;
+    margin: 10px 5px 10px 10px;
 }
+
+.body-content {
+    position: absolute;
+    width: 100%;
+    top: 80px;
+    bottom: 40px;
+}
+
 
 ul[id="navigation_bar"]{
     float: right;
-    margin: 20px 5px 20px 5px;
+    margin: 0 auto;
 }
 
 ul[id="navigation_bar"] li{
@@ -32,21 +46,17 @@ ul[id="navigation_bar"] li a{
 }
 
 ul[id="navigation_bar"] li a:hover{
-    background-color: white;
-    color: #699FA1;
-}
-
-
-ul[id="navigation_bar"] li.home a{
-    background-color: white;
-    color: #699FA1;
+    color: #FF844B;
+    border-bottom-color: #FF844B;
 }
 
 footer{
-    position:absolute;
+    position: absolute;
+    text-align: center;
     bottom:0;
     width:100%;
-    background-color: #699FA1;
+    height: 20px;
+    background-color: rgba(0,0,0,.4);
     color: white;
 }
 
@@ -55,3 +65,6 @@ footer p{
     font-size: 12px;
     float: right;
 }
+
+
+
