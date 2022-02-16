@@ -12,7 +12,7 @@
     {% if allow_modification %}
         <h3 class="title">Add New Criteria</h3>
 
-        <form action="/criteria/creation" method="POST" enctype="multipart/form-data">
+        <form class = "create-criteria" action="/criteria/creation" method="POST" enctype="multipart/form-data">
             <div>
                 <label>Criteria Name: </label>
                 <input type="text" name="criteria_name" placeholder="criteria name" autofocus=""><br>
@@ -39,40 +39,44 @@
             {% endif %}
         {% endwith %}
     {% endif %}
+
     {% if not criteria_list %}
         <h3 class="title">No Criteria Exist</h3>
     {% else %}
-        <h3 class="title">Criteria List</h3>
-        <table id="Criteria List">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Creator</th>
-                <th>Delete</th>
-            </tr>
 
+        <h3 class="title">Criteria List</h3>
+        <div class="criteria-result">
+            <ul class = "criteria-list-table">
+            <li class = "list-header">
+                <div class = "col col-1">ID</div>
+                <div class = "col col-2">Name</div>
+                <div class = "col col-3">Description</div>
+                <div class = "col col-4">Creator</div>
+                <div class = "col col-5"></div>
+            </li>
+           <form action="/criteria/delete" method="POST">
             {% for criteria in criteria_list %}
-                <form action="/criteria/delete" method="POST">
-                    <tr>
-                        <td>
-                            <label>
-                                <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
-                            </label>
-                        </td>
-                        <td>{{ criteria.name }}</td>
-                        <td>{{ criteria.description }}</td>
-                        <td>{{ criteria.user.name }}</td>
-                        <td>
+
+                <li class = "list-row">
+                        <div class = "col col-1">
+                        <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
+                        </div>
+                        <div class = "col col-2">{{ criteria.name }}</div>
+                        <div class = "col col-3">{{ criteria.description }}</div>
+                        <div class = "col col-4">{{ criteria.user.name }}</div>
+                        <div class = "col col-5">
                             {% if allow_modification %}
                                 <input type="submit" name="action" value="Delete"/>
                             {% else %}
                                 <input type="submit" name="action" value="Delete" disabled/>
                             {% endif %}
-                        </td>
-                    </tr>
+                        </div>
+                  </li>
+
                 </form>
+
             {% endfor %}
-        </table>
+        </ul>
+        </div>
     {% endif %}
 {% endblock %}
