@@ -253,7 +253,7 @@ def update_evidence(evidence_id, new_description):
 
 # update evidence content
 def update_evidence_with_file(evidence_id, new_description, contents):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, contents=contents)
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, content=contents)
     main_db.engine.execute(stmt)
 
 

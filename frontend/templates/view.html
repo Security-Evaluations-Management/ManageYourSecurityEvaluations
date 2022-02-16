@@ -10,7 +10,7 @@
 
 {% block content %}
     <h3 class="title">View Evidence</h3>
-    <form action="/update_evidence" method="POST">
+    <form action="/update_evidence" method="POST" enctype="multipart/form-data">
         <table id="evidence_info">
             <tr>
                 <td>Evidence ID:</td>
@@ -55,7 +55,7 @@
             <tr>
                 <td>To replace the content:</td>
                 <td>
-                    <input type="file" name="file_upload"><br>
+                    <input type="file" name="file_upload">
                 </td>
             </tr>
         </table>
