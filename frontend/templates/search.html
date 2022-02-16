@@ -66,16 +66,18 @@
             <li class = "table-header">
                 <div class="col col-1 ">ID</div>
                 <div class="col col-2 ">Name</div>
-                <div class="col col-3 ">Last Edit Time</div>
-                <div class="col col-4 "></div>
+                <div class="col col-3 ">Project Name</div>
+                <div class="col col-4 ">Last Edit Time</div>
+                <div class="col col-5 "></div>
             </li>
 
         {% for evidence in results.items %}
             <li class = "table-row">
                 <div class = "col col-1">{{ evidence.id}}</div>
                 <div class = "col col-2">{{ evidence.name }}</div>
-                <div class = "col col-3">{{ evidence.last_edit_time}}</div>
-                <div class = "col col-4"><a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a></div>
+                <div class = "col col-3">{{ evidence.project_name }}</div>
+                <div class = "col col-4">{{ evidence.last_edit_time}}</div>
+                <div class = "col col-5"><a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a></div>
 
             </li>
         {% endfor %}

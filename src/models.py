@@ -210,7 +210,7 @@ def no_filter_search_result():
 
 # get evidence by filters
 def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
-    evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.create_date_time,
+    evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.project_name, Evidence.create_date_time,
                                      Evidence.last_edit_time).join(Criteria).join(User)
     if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
         return evidence
