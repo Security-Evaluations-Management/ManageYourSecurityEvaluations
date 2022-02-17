@@ -7,14 +7,16 @@ def approve_access(role, action):
             'criteria': True,
             'criteria_modification': True,
             'view': True,
-            'update_evidence': True
+            'update_evidence': True,
+            'delete_evidence': True
         },
         'DEV': {
             'upload': True,
             'search': True,
             'criteria': True,
             'view': True,
-            'update_evidence': True
+            'update_evidence': True,
+            'delete_evidence': True
         },
         'QA': {
             'search': True,

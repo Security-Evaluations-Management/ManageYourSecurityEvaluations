@@ -275,3 +275,19 @@ def get_criteria_by_id(criteria_id):
 def get_user_by_id(user_id):
     user = User.query.filter_by(id=user_id).first()
     return user
+
+
+def get_evidence_by_userid(user_id):
+    evidence = main_db.session.query(Evidence).join(User).filter(User.id == user_id).all()
+    return evidence
+
+
+def delete_evidence(evidence_id):
+    result = Evidence.query.filter_by(id=evidence_id).first()
+    print(result)
+    if result is not None:
+        Evidence.query.filter_by(id=evidence_id).delete()
+        main_db.session.commit()
+        return True
+    else:
+        return False

@@ -177,3 +177,19 @@ def update_evidence():
     else:
         models.update_evidence(evidence_id, new_description)
     return redirect(url_for('evidence.view', evidence_id=evidence_id))
+
+
+@evidence_blueprint.route('/delete_evidence', methods=['POST'])
+@login_required
+def delete_evidence():
+    evidence_id = request.form.get("evidence_id")
+    evidence_to_delete = models.get_evidence_info(evidence_id)
+
+    if not approve_access(current_user.role.name, 'delete_evidence') or not evidence_to_delete[
+                                                                                'user_id'] == current_user.id:
+        abort(403)
+
+    if models.delete_evidence(evidence_id):
+        return redirect(url_for('main.home'))
+
+    abort(400)
