@@ -51,35 +51,38 @@
                 </td>
                 <td>
                     <div>
-                        {% if current_user.role.name == 'DEV' or current_user.role.name == 'Admin' %}
-                            <h2>Evidence Uploaded by you: </h2>
-                            <table id="evidence_list">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Creation Date</th>
-                                    <th>Last Edit Time</th>
-                                    <th>Project Name</th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                                {% for evidence in evidence_list %}
-                                    <form action="/delete_evidence" method="POST">
-                                        <tr>
-                                            <td>
-                                                <input type="text" name="evidence_id" value="{{ evidence.id }}"
-                                                       readonly/>
-                                            </td>
-                                            <td>{{ evidence.name }}</td>
-                                            <td>{{ evidence.create_date_time }}</td>
-                                            <td>{{ evidence.last_edit_time }}</td>
-                                            <td>{{ evidence.project_name }}</td>
-                                            <td><a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a>
-                                            </td>
-                                            <td><input type="submit" value="Delete"></td>
-                                        </tr>
-                                    </form>
-                                {% endfor %}
-                            </table>
+                        {% if evidence_list %}
+                            {% if current_user.role.name == 'DEV' or current_user.role.name == 'Admin' %}
+                                <h2>Evidence Uploaded by you: </h2>
+                                <table id="evidence_list">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Creation Date</th>
+                                        <th>Last Edit Time</th>
+                                        <th>Project Name</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    {% for evidence in evidence_list %}
+                                        <form action="/delete_evidence" method="POST">
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="evidence_id" value="{{ evidence.id }}"
+                                                           readonly/>
+                                                </td>
+                                                <td>{{ evidence.name }}</td>
+                                                <td>{{ evidence.create_date_time }}</td>
+                                                <td>{{ evidence.last_edit_time }}</td>
+                                                <td>{{ evidence.project_name }}</td>
+                                                <td>
+                                                    <a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a>
+                                                </td>
+                                                <td><input type="submit" value="Delete"></td>
+                                            </tr>
+                                        </form>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </td>
