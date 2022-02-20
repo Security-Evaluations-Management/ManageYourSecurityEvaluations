@@ -1,5 +1,7 @@
+ul[id="navigation_bar"] li.admin{
+    border-bottom-color: #FF844B;
+}
 
 ul[id="navigation_bar"] li.admin a{
     color: #FF844B;
-    border-bottom-color: #FF844B;
 }
