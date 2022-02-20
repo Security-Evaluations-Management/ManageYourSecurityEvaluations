@@ -25,24 +25,25 @@ ul[id="navigation_bar"]{
 ul[id="navigation_bar"] li{
     display: inline-block;
     margin-right: 15px;
+    height: 54px;
+    border: 3px solid transparent;
 }
 
 ul[id="navigation_bar"] li a{
-    height: 60px;
     line-height: 60px;
     text-decoration: none;
     color: white;
     padding: 0 20px;
-    border: 3px solid transparent;
+
 }
 
-ul[id="navigation_bar"] li a:hover{
+ul[id="navigation_bar"] li:hover{
     color: #FF844B;
     border-bottom-color: #FF844B;
 }
 
 .body-content {
-    position: fixed;
+    position: absolute;
     width: 100%;
     top: 60px;
     bottom: 20px;
