@@ -54,8 +54,8 @@
                 <div class = "col col-4" data-label="user">Creator</div>
                 <div class = "col col-5" data-label="delete"></div>
             </li>
-            <form action="/criteria/delete" method="POST">
             {% for criteria in criteria_list %}
+            <form action="/criteria/delete" method="POST">
                 <li class = "list-row">
                         <div class = "col col-1" data-label="id">
                         <input type="text" name="criteria_to_remove_id" value="{{ criteria.id }}" readonly/>
@@ -65,13 +65,13 @@
                         <div class = "col col-4" data-label="user">{{ criteria.user.name }}</div>
                         <div class = "col col-5" data-label="delete">
                             {% if allow_modification %}
-                                <input type="submit" name="action" value="Delete"/>
-{#                            {% else %}#}
-{#                                <input type="submit" name="action" value="Delete" disabled/>#}
+                                <input type="submit" value="Delete"/>
+                            {% else %}
+                                <input type="submit" value="Delete" disabled/>
                             {% endif %}
                         </div>
                   </li>
-                </form>
+            </form>
             {% endfor %}
         </ul>
 
