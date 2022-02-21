@@ -141,11 +141,12 @@ input[type=submit]:hover {
 }
 
 input.id{
-    width: 18px;
-    border-color: transparent;
+    width: 20px;
+    border: none;
     box-shadow: none;
-    border-radius: 5px;
-    text-align: center;
+    text-align: left;
+    background-color: transparent;
+    color: white;
 }
 
 div.container{
@@ -158,33 +159,40 @@ div.container{
 div.evidence_list{
     position:absolute;
     margin-left: 900px;
-    margin-top: -80px;
+    margin-top: -50px;
 }
 
 table{
-    max-height: 400px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
     width: 500px;
     background-color:rgba(0, 0, 0, .4);
-    padding: 20px;
+    text-align: center;
 }
 
-thead, tbody{
+table tbody{
     display: block;
+    max-height: 415px;
+    overflow-y: scroll;
+}
+
+table thead, tbody tr{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table thead{
+    width: calc(100% - 1em);
 }
 
 th{
     color: #FF844B;
-    margin-right: 20px;
+    padding: 10px;
 }
 
 td{
     color: white;
-    text-align: center;
-}
-
-tbody{
-    max-height: 400px;
-    overflow-y: scroll;
 }
 
 div.user_info{

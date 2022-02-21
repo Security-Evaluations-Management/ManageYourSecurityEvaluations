@@ -26,6 +26,7 @@
                 <input type="file", name="criteria_file"><br>
             </div>
             <div>
+                <label></label>
                 <input type="submit" name="action" value="Submit"/>
             </div>
         </form>
@@ -45,8 +46,7 @@
     {% else %}
 
         <h3 class="title">Criteria List</h3>
-
-            <ul class = "criteria-list-table">
+        <ul class = "criteria-list-table">
             <li class = "list-header">
                 <div class = "col col-1" data-label="id">ID</div>
                 <div class = "col col-2" data-label="name">Name</div>
@@ -54,7 +54,7 @@
                 <div class = "col col-4" data-label="user">Creator</div>
                 <div class = "col col-5" data-label="delete"></div>
             </li>
-           <form action="/criteria/delete" method="POST">
+            <form action="/criteria/delete" method="POST">
             {% for criteria in criteria_list %}
                 <li class = "list-row">
                         <div class = "col col-1" data-label="id">
