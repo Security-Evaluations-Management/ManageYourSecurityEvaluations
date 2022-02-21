@@ -13,47 +13,63 @@
     <form action="/update_evidence" method="POST" enctype="multipart/form-data">
         <table id="evidence_info">
             <tr>
-                <td>Evidence ID:</td>
+                <td><p class="evidence-title">Evidence ID:</p></td>
                 <td>
-                    <input type="text" name="evidence_id" value="{{ evidence.id }}" readonly/>
+                    {{ evidence.id }}
                 </td>
             </tr>
             <tr>
-                <td>Evidence Name:</td>
-                <td><b>{{ evidence.name }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Evidence Name:</p></td>
+                <td>{{ evidence.name }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Creator:</td>
-                <td><b>{{ creator.name }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Creator:</p></td>
+                <td>{{ creator.name }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Create Date:</td>
-                <td><b>{{ evidence.create_date_time }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Create Date:</p></td>
+                <td>{{ evidence.create_date_time }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Last Edit Time:</td>
-                <td><b>{{ evidence.last_edit_time }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Last Edit Time:</p></td>
+                <td>{{ evidence.last_edit_time }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Project Name:</td>
-                <td><b>{{ evidence.project_name }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Project Name:</p></td>
+                <td>{{ evidence.project_name }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Criteria:</td>
-                <td><b>{{ linked_criteria.name }}</b></td>
+                <div>
+                    <td><p class="evidence-title">Criteria:</p></td>
+                <td>{{ linked_criteria.name }}</td>
+                </div>
             </tr>
             <tr>
-                <td>Description:</td>
+                <div class = "description-box">
+                <td><p class="evidence-title">Description:</p></td>
                 <td>
-                    <textarea name="description">{{ evidence.description }}</textarea>
+                <textarea name="description">{{ evidence.description }}</textarea>
                 </td>
+                </div>
+
             </tr>
+                <p class="content-title">Current Content:</p>
+                <div class = "description">
+                <p>{{ evidence.content }}</p>
+                </div>
+
             <tr>
-                <td>Current Content:</td>
-                <td><b>{{ evidence.content }}</b></td>
-            </tr>
-            <tr>
-                <td>To replace the content:</td>
+                <td><p class="evidence-title">To replace the content:</p></td>
                 <td>
                     <input type="file" name="file_upload">
                 </td>
