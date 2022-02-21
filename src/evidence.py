@@ -98,7 +98,6 @@ def upload():
         abort(403)
 
     criteria_list = models.criteria_id_name()
-    print(criteria_list)
 
     return render_template('upload.html', criteria_list=criteria_list)
 

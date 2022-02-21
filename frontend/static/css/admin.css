@@ -1,6 +1,10 @@
+ul[id="navigation_bar"] li.admin{
+    border-bottom-color: #FF844B;
+}
 
 ul[id="navigation_bar"] li.admin a{
     color: #FF844B;
+<<<<<<< HEAD
     border-bottom-color: #FF844B;
 }
 h3{
@@ -148,3 +152,6 @@ div {
     margin-top: 10px;
 
 }
+=======
+}
+>>>>>>> 2d1a859b6fc63288ff46751d7b7050c4f0756ffc

@@ -1,6 +1,9 @@
+ul[id="navigation_bar"] li.criteria{
+    border-bottom-color: #FF844B;
+}
+
 ul[id="navigation_bar"] li.criteria a{
     color: #FF844B;
-    border-bottom-color: #FF844B;
 }
 
 h3 {

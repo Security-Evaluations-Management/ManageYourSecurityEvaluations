@@ -1,7 +1,7 @@
 .pre_login {
     position: absolute;
     background-size: 100%;
-    background: url('../images/welcome4.jpg') no-repeat right;
+    background: url('../images/welcome4.jpg') no-repeat 50% 50%;
     width: 80%;
     height: 90%;
 }
@@ -48,9 +48,12 @@ h1{
     top: 50%;
 }
 
+ul[id="navigation_bar"] li.home{
+    border-bottom-color: #FF844B;
+}
+
 ul[id="navigation_bar"] li.home a{
     color: #FF844B;
-    border-bottom-color: #FF844B;
 }
 
 h2{
@@ -135,4 +138,57 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background: #FFB999;
+}
+
+input.id{
+    width: 18px;
+    border-color: transparent;
+    box-shadow: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+div.container{
+    position:absolute;
+    width: 1500px;
+    height: 80%;
+    padding: 20px;
+}
+
+div.evidence_list{
+    position:absolute;
+    margin-left: 900px;
+    margin-top: -80px;
+}
+
+table{
+    max-height: 400px;
+    width: 500px;
+    background-color:rgba(0, 0, 0, .4);
+    padding: 20px;
+}
+
+thead, tbody{
+    display: block;
+}
+
+th{
+    color: #FF844B;
+    margin-right: 20px;
+}
+
+td{
+    color: white;
+    text-align: center;
+}
+
+tbody{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+div.user_info{
+    position:absolute;
+    margin-left: 200px;
+    margin-top: -50px;
 }

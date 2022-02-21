@@ -1,6 +1,9 @@
+ul[id="navigation_bar"] li.search{
+    border-bottom-color: #FF844B;
+}
+
 ul[id="navigation_bar"] li.search a{
     color: #FF844B;
-    border-bottom-color: #FF844B;
 }
 
 .body-content {
