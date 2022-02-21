@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
-from sqlalchemy import update
+from sqlalchemy import update, and_
 
 main_db = SQLAlchemy()
 
@@ -39,8 +39,8 @@ class Evidence(main_db.Model):
     def __init__(self, name, project_name, description, content, user_id, criteria_id):
         self.name = name
         self.project_name = project_name
-        self.create_date_time = datetime.now()
-        self.last_edit_time = datetime.now()
+        self.create_date_time = datetime.now().replace(microsecond=0)
+        self.last_edit_time = datetime.now().replace(microsecond=0)
         self.description = description
         self.content = content
         self.user_id = user_id
@@ -157,7 +157,7 @@ def add_evidence(evidence_name, project_name, description, content, user_id, cri
         evidence = Evidence(evidence_name, project_name, description, content, user_id, criteria_id)
         main_db.session.add(evidence)
         main_db.session.commit()
-        return True
+        return Evidence.query.filter_by(name=evidence_name).first().id
     return False
 
 
