@@ -1,6 +1,9 @@
+ul[id="navigation_bar"] li.criteria{
+    border-bottom-color: #FF844B;
+}
+
 ul[id="navigation_bar"] li.criteria a{
     color: #FF844B;
-    border-bottom-color: #FF844B;
 }
 
 h3 {
@@ -82,14 +85,11 @@ input[type=submit]:hover {
 }
 
 .criteria-list-table{
-  max-width: 2000px;
+  max-width: 100%;
   max-height: 500px;
-  margin-left: auto;
-  margin-right: auto;
   padding-left: 5px;
   padding-right: 5px;
-  overflow:scroll;
-
+  overflow-y:scroll;
 }
 
   li {

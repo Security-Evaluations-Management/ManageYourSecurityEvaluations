@@ -19,74 +19,71 @@
     {% elif current_user.is_authenticated %}
         <div class="after_login">
         </div>
-        <table>
-            <tr>
-                <td>
-                    <h2>Welcome, {{ current_user.name }}!</h2>
-                    <form action="/update" method="POST">
-                        <div>
-                            <label class="title">Your Profile</label>
-                        </div>
-                        <div>
-                            <label class="attribute">Name: </label>
-                            <input type="text" name="name" value="{{ current_user.name }}"/>
-                        </div>
-                        <div>
-                            <label class="attribute">Email: </label>
-                            <label>{{ current_user.email }}</label>
-                        </div>
-                        <div>
-                            <label class="attribute">Role:</label>
-                            <label>{{ current_user.role.name }}</label>
-                        </div>
-                        <div>
-                            <label class="attribute">New Password:</label>
-                            <input type="password" name="password" placeholder="Password"><br>
-                        </div>
-                        <div>
-                            <label class="attribute"></label>
-                            <input type="submit" name="action" value="Update"/>
-                        </div>
-                    </form>
-                </td>
-                <td>
+        <div class="container">
+            <div class="user_info">
+                <h2>Welcome, {{ current_user.name }}!</h2>
+                <form action="/update" method="POST">
                     <div>
-                        {% if evidence_list %}
-                            {% if current_user.role.name == 'DEV' or current_user.role.name == 'Admin' %}
-                                <h2>Evidence Uploaded by you: </h2>
-                                <table id="evidence_list">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Creation Date</th>
-                                        <th>Last Edit Time</th>
-                                        <th>Project Name</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                    {% for evidence in evidence_list %}
-                                        <form action="/delete_evidence" method="POST">
-                                            <tr>
-                                                <td>
-                                                    <input type="text" name="evidence_id" value="{{ evidence.id }}"
-                                                           readonly/>
-                                                </td>
-                                                <td>{{ evidence.name }}</td>
-                                                <td>{{ evidence.create_date_time }}</td>
-                                                <td>{{ evidence.last_edit_time }}</td>
-                                                <td>{{ evidence.project_name }}</td>
-                                                <td>
-                                                    <a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a>
-                                                </td>
-                                                <td><input type="submit" value="Delete"></td>
-                                            </tr>
-                                        </form>
-                                    {% endfor %}
-                                </table>
-                            {% endif %}
-                        {% endif %}
+                        <label class="title">Your Profile</label>
                     </div>
-                </td>
-            </tr>
-        </table>
+                    <div>
+                        <label class="attribute">Name: </label>
+                        <input type="text" name="name" value="{{ current_user.name }}"/>
+                    </div>
+                    <div>
+                        <label class="attribute">Email: </label>
+                        <label>{{ current_user.email }}</label>
+                    </div>
+                    <div>
+                        <label class="attribute">Role:</label>
+                        <label>{{ current_user.role.name }}</label>
+                    </div>
+                    <div>
+                        <label class="attribute">New Password:</label>
+                        <input type="password" name="password" placeholder="Password"><br>
+                    </div>
+                    <div>
+                        <label class="attribute"></label>
+                        <input type="submit" name="action" value="Update"/>
+                    </div>
+                </form>
+            </div>
+            <div class="evidence_list">
+                {% if evidence_list %}
+                {% if current_user.role.name == 'DEV' or current_user.role.name == 'Admin' %}
+                <h2>Evidence Uploaded by {{ current_user.name }}: </h2>
+                <table id="evidence_list">
+                    <thead>
+                        <tr>
+                            <th class="p1">ID</th>
+                            <th class="p2">Name</th>
+                            <th class="p3">Project Name</th>
+                            <th colspan="2" class="p4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evidence in evidence_list %}
+                        <form action="/delete_evidence" method="POST">
+                            <tr>
+                                <td class="p1">
+                                    <input type="text" class="id" name="evidence_id" value="{{ evidence.id }}"
+                                           readonly/>
+                                </td>
+                                <td class="p2">{{ evidence.name }}</td>
+                                <td class="p3">{{ evidence.project_name }}</td>
+                                <td class="p5">
+                                    <a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a>
+                                </td>
+                                <td class="p5"><input type="submit" value="Delete"></td>
+                            </tr>
+                        </form>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
     {% endif %}
 {% endblock %}
