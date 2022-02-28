@@ -21,7 +21,6 @@ In addition, thank to Professor Mostafa Taha, who gave us suggestions for our pr
 Finally, thank to all the members of this project group. Your efforts have brought this project from conception to realization.<br />
 
 
-
 ## About The Project
 **Manage Your Security Evaluations** is one of 2021/22 engineering projects of the Department of System and Computer Engineering.<br />
 This project aims to develop a platform that developers can use to store and manage the security evidence 
@@ -124,12 +123,14 @@ To make contributions to our project, please follow the following steps:
 
 
 ## Contact
-Project Supervisor: [**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />
+Project Supervisor: 
+**&emsp;&emsp;[**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />**
+
 Team Members: <br />
-**<a href="https://www.linkedin.com/in/zijun-hu/">Zijun Hu</a><br />
-<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
-<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
-<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
+**&emsp;&emsp;<a href="https://www.linkedin.com/in/zijun-hu/">Zijun Hu</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
