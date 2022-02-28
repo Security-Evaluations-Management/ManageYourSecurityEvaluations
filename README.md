@@ -13,6 +13,10 @@
 
 
 <!-- ABOUT THE PROJECT -->
+## Acknowledgments
+
+
+
 ## About The Project
 **Manage Your Security Evaluations** is one of 2021/22 engineering projects of the Department of System and Computer Engineering.<br />
 This project aims to develop a platform that developers can use to store and manage the security evidence 
@@ -121,10 +125,6 @@ Team Members: <br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
 &emsp;&emsp;<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
-
-
-
-## Acknowledgments
 
 
 
