@@ -14,6 +14,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## Acknowledgments
+In developing this project, we received a lot of help from some respected persons, who deserve our greatest gratitude. The completion of this project gives us so much confidence and pleasure. We would like to show our appreciation to Dr. Jason Jaskolka for giving us a well organized guideline and useful suggestions for this project throughout these two semesters.<br />
+In addition, thank to Professor Mostafa Taha, who gave us suggestions for our progress report. We also thank Carleton University for consent to include copyrighted pictures as a part of our final report.<br />
+Finally, thank to all the members of this project group. Your efforts have brought this project from conception to realization.<br />
 
 
 
