@@ -90,9 +90,6 @@ For more detailed information, please refer to the [Documentation Section](https
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Roadmap
-
-
 ## Contributing
 To make contributions to our project, please follow the following steps:
 1. Fork the Project
@@ -118,6 +115,12 @@ To make contributions to our project, please follow the following steps:
 
 
 ## Contact
+Project Supervisor: [**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />
+Team Members: <br />
+**&emsp;&emsp;<a href="https://www.linkedin.com/in/zijun-hu/">Zijun Hu</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
 
 
 
