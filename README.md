@@ -13,6 +13,14 @@
 
 
 <!-- ABOUT THE PROJECT -->
+## Acknowledgments
+In developing this project, we received a lot of help from some respected persons, who deserve our greatest gratitude. The completion of this project gives us so much confidence and pleasure. We would like to show our appreciation to Dr. Jason Jaskolka for giving us a well organized guideline and useful suggestions for this project throughout these two semesters.<br />
+
+In addition, thank to Professor Mostafa Taha, who gave us suggestions for our progress report. We also thank Carleton University for consent to include copyrighted pictures as a part of our final report.<br />
+
+Finally, thank to all the members of this project group. Your efforts have brought this project from conception to realization.<br />
+
+
 ## About The Project
 **Manage Your Security Evaluations** is one of 2021/22 engineering projects of the Department of System and Computer Engineering.<br />
 This project aims to develop a platform that developers can use to store and manage the security evidence 
@@ -90,9 +98,6 @@ For more detailed information, please refer to the [Documentation Section](https
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Roadmap
-
-
 ## Contributing
 To make contributions to our project, please follow the following steps:
 1. Fork the Project
@@ -118,11 +123,16 @@ To make contributions to our project, please follow the following steps:
 
 
 ## Contact
+Project Supervisor: <br />
+**&emsp;&emsp;[**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />**
 
+Team Members: <br />
+**&emsp;&emsp;<a href="https://www.linkedin.com/in/zijun-hu/">Zijun Hu</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/tiantian-lin-0595291a2/?originalSubdomain=ca">Tiantian Lin</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/jiawei-ma-19841715b/">Jiawei Ma</a><br />
+&emsp;&emsp;<a href="https://www.linkedin.com/in/ruixuan-ni-a4bb5b19b/">Ruixuan Ni</a><br />**
 
-
-## Acknowledgments
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
