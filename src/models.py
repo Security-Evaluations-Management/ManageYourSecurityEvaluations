@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
-from sqlalchemy import update, and_
+from sqlalchemy import update, and_, Table
 
 main_db = SQLAlchemy()
 
@@ -33,6 +33,7 @@ class Evidence(main_db.Model):
     last_edit_time = main_db.Column(main_db.DateTime, nullable=False)
     description = main_db.Column(main_db.String)
     content = main_db.Column(main_db.String, nullable=False)
+    status = main_db.Column(main_db.Integer)
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     criteria_id = main_db.Column(main_db.Integer, main_db.ForeignKey('criteria.id'), nullable=False)
 
@@ -43,6 +44,7 @@ class Evidence(main_db.Model):
         self.last_edit_time = datetime.now().replace(microsecond=0)
         self.description = description
         self.content = content
+        self.status = 0
         self.user_id = user_id
         self.criteria_id = criteria_id
 
@@ -54,6 +56,12 @@ class Criteria(main_db.Model):
     description = main_db.Column(main_db.String(200))
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     evidence = main_db.relationship('Evidence', backref='criteria', lazy='dynamic')
+
+
+# association_table = Table('association', Base.metadata,
+#                           Column('left_id', ForeignKey('left.id')),
+#                           Column('right_id', ForeignKey('right.id'))
+#                           )
 
 
 def add_new_user(email, password, name):
@@ -211,7 +219,7 @@ def no_filter_search_result():
 # get evidence by filters
 def get_info_by_filter(criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id):
     evidence = main_db.session.query(Evidence.id, Evidence.name, Evidence.project_name, Evidence.create_date_time,
-                                     Evidence.last_edit_time).join(Criteria).join(User)
+                                     Evidence.last_edit_time, Evidence.status).join(Criteria).join(User)
     if all(v is None for v in [criteria_name, project_name, employee_name, create_time, last_edit_time, evidence_id]):
         return evidence
     else:
@@ -245,7 +253,7 @@ def get_evidence_by_id(evidence_id):
     return result.fetchall()
 
 
-# update evidence content
+# update evidence description
 def update_evidence(evidence_id, new_description):
     stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description)
     main_db.engine.execute(stmt)
@@ -291,3 +299,15 @@ def delete_evidence(evidence_id):
         return True
     else:
         return False
+
+
+# get the evidence status according to the id
+def get_evidence_status(evidence_id):
+    result = main_db.session.query(Evidence.status).filter(Evidence.id == evidence_id)
+    return result
+
+
+# update new evidence status according to the id
+def update_evidence_status(evidence_id, new_status):
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(status=new_status)
+    main_db.engine.execute(stmt)
