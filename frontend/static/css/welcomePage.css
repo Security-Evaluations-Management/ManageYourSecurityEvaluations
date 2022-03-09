@@ -193,10 +193,20 @@ th{
 
 td{
     color: white;
+    width: 80px
 }
 
 div.user_info{
     position:absolute;
     margin-left: 10%;
     margin-top: -50px;
+}
+i.fa-check{
+    color: #1fa11f;
+  }
+i.fa-close{
+    color: #c70606;
+  }
+i.fa-exclamation-triangle{
+    color: #fdc50a;
 }

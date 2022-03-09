@@ -2,6 +2,7 @@
 
 {% block rel %}
     <link rel="stylesheet" href="/static/css/welcomePage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block page_title %}
@@ -58,6 +59,7 @@
                             <th class="p1">ID</th>
                             <th class="p2">Name</th>
                             <th class="p3">Project Name</th>
+                            <th class="p6">Status</th>
                             <th colspan="2" class="p4">Action</th>
                         </tr>
                     </thead>
@@ -71,6 +73,22 @@
                                 </td>
                                 <td class="p2">{{ evidence.name }}</td>
                                 <td class="p3">{{ evidence.project_name }}</td>
+                                {% if evidence.status == 1 %}
+                                    <td class="p6">
+                                <i class="fa fa-check" style="font-size:24px"></i>
+                                    </td>
+                                {% endif %}
+                                {% if evidence.status == 0 %}
+                                    <td class="p6">
+                                <i class="fa fa-exclamation-triangle" style="font-size:24px"></i>
+                                    </td>
+                                {% endif %}
+                                {% if evidence.status == -1 %}
+                                    <td class="p6">
+                                <i class="fa fa-check" style="font-size:24px"></i>
+                                    </td>
+                                {% endif %}
+                                <!--td class="p6">{{ evidence.status }}</td-->
                                 <td class="p5">
                                     <a href="{{ url_for('evidence.view') }}?evidence_id={{ evidence.id }}">View</a>
                                 </td>

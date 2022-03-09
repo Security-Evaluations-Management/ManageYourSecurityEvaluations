@@ -220,7 +220,10 @@ input[type=submit]:hover {
     flex-basis: 60%;
   }
   .col-5 {
-    flex-basis: 25%;
+    flex-basis: 20%;
+  }
+  .col-6 {
+    flex-basis: 35%;
   }
 
   @media all and (max-width: 567px) {
@@ -247,6 +250,16 @@ input[type=submit]:hover {
         text-align: right;
       }
   }
+
+i.fa-check{
+    color: #1fa11f;
+  }
+i.fa-close{
+    color: #c70606;
+  }
+i.fa-exclamation-triangle{
+    color: #fdc50a;
+}
 
 
 
