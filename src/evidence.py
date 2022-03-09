@@ -140,41 +140,59 @@ def upload_post():
 def view():
     if not approve_access(current_user.role.name, 'view'):
         abort(403)
+
     evidence_id = request.args.get("evidence_id")
     evidence = models.get_evidence_info(evidence_id)
     linked_criteria = models.get_criteria_by_id(evidence['criteria_id'])
     creator = models.get_user_by_id(evidence['user_id'])
 
-    return render_template('view.html', evidence=evidence, linked_criteria=linked_criteria, creator=creator)
+    can_approve = approve_access(current_user.role.name, 'approve_evidence')
+
+    return render_template('view.html', evidence=evidence, linked_criteria=linked_criteria, creator=creator,
+                           can_approve=can_approve)
 
 
 @evidence_blueprint.route('/update_evidence', methods=['POST'])
 @login_required
 def update_evidence():
-    if not approve_access(current_user.role.name, 'update_evidence'):
-        abort(403)
-
+    action = request.form.get('action')
     evidence_id = request.form.get("evidence_id")
-    new_description = request.form.get("description")
-    file = request.files.get('file_upload')
 
-    file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER)
-    if not os.path.exists(file_dir):
-        os.makedirs(file_dir)
+    if action == 'Submit Changes':
+        if not approve_access(current_user.role.name, 'update_evidence'):
+            abort(403)
 
-    if file:
-        file_path = os.path.join(file_dir, file.filename)
-        file.save(file_path)
-        f = open(file_path, 'r')
-        contents = f.read()
-        if not contents:
-            contents = " "
-        try:
-            models.update_evidence_with_file(evidence_id, new_description, contents)
-        except SQLAlchemyError as e:
-            flash("evidence upload fail due to file upload fail/evidence name repeat")
+        new_description = request.form.get("description")
+        file = request.files.get('file_upload')
+
+        file_dir = os.path.join(os.getcwd(), UPLOAD_FOLDER)
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+
+        if file:
+            file_path = os.path.join(file_dir, file.filename)
+            file.save(file_path)
+            f = open(file_path, 'r')
+            contents = f.read()
+            if not contents:
+                contents = " "
+            try:
+                models.update_evidence_with_file(evidence_id, new_description, contents)
+            except SQLAlchemyError as e:
+                flash("evidence upload fail due to file upload fail/evidence name repeat")
+        else:
+            models.update_evidence(evidence_id, new_description)
     else:
-        models.update_evidence(evidence_id, new_description)
+        if not approve_access(current_user.role.name, 'approve_evidence'):
+            abort(403)
+
+        if action == 'Approve':
+            models.update_evidence_status(evidence_id, 1)
+        elif action == 'Disapprove':
+            models.update_evidence_status(evidence_id, -1)
+        elif action == 'Return to Pending':
+            models.update_evidence_status(evidence_id, 0)
+
     return redirect(url_for('evidence.view', evidence_id=evidence_id))
 
 

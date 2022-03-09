@@ -15,7 +15,7 @@
             <tr>
                 <td><p class="evidence-title">Evidence ID:</p></td>
                 <td>
-                    {{ evidence.id }}
+                    <input type="text" name="evidence_id" value="{{ evidence.id }}" readonly/>
                 </td>
             </tr>
             <tr>
@@ -63,26 +63,26 @@
                 </div>
 
             </tr>
-             <tr>
-                <div class = "status-dropdown">
-                <td><p class="evidence-title">Status:</p></td>
-                <td><select name="status" id="status">
-                  <option value="approve">Approve</option>
-                  <option value="pending">Pending</option>
-                  <option value="deny">Deny</option>
-                </select></td>
-                </div>
-
+            <tr>
+                <td>
+                    <p class="content-title">Current Content:</p>
+                </td>
+                <td>
+                    <div class = "description">
+                        <p>{{ evidence.content }}</p>
+                    </div>
+                </td>
             </tr>
-                <p class="content-title">Current Content:</p>
-                <div class = "description">
-                <p>{{ evidence.content }}</p>
-                </div>
-
             <tr>
                 <td><p class="evidence-title">To replace the content:</p></td>
                 <td>
                     <input type="file" name="file_upload">
+                </td>
+            </tr>
+            <tr>
+                <td>Current Status: </td>
+                <td>
+                    {{ evidence.status }}
                 </td>
             </tr>
         </table>
@@ -97,6 +97,13 @@
                 {% endif %}
             {% endwith %}
         </div>
-        <input type="submit" value="Submit Changes">
+        <input type="submit" value="Submit Changes" name="action"><br>
+        {% if can_approve %}
+            <div>
+                <input type="submit" value="Approve" name="action">
+                <input type="submit" value="Return to Pending" name="action">
+                <input type="submit" value="Disapprove" name="action">
+            </div>
+        {% endif %}
     </form>
 {% endblock %}
