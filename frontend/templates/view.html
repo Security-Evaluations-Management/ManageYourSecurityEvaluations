@@ -2,6 +2,7 @@
 
 {% block rel %}
     <link rel="stylesheet" href="/static/css/view.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block page_title %}
@@ -82,7 +83,24 @@
             <tr>
                 <td>Current Status: </td>
                 <td>
-                    {{ evidence.status }}
+                    {% if evidence.status == 1 %}
+                        <td class="p6">
+                            Approved
+                            <i class="fa fa-check" style="font-size:24px"></i>
+                        </td>
+                    {% endif %}
+                    {% if evidence.status == 0 %}
+                        <td class="p6">
+                            Pending
+                            <i class="fa fa-exclamation-triangle" style="font-size:24px"></i>
+                        </td>
+                    {% endif %}
+                    {% if evidence.status == -1 %}
+                        <td class="p6">
+                            Disapproved
+                            <i class="fa fa-close" style="font-size:24px"></i>
+                        </td>
+                    {% endif %}
                 </td>
             </tr>
         </table>
