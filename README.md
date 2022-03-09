@@ -118,10 +118,6 @@ To make contributions to our project, please follow the following steps:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## License
-
-
-
 ## Contact
 Project Supervisor: <br />
 **&emsp;&emsp;[**Dr. Jason Jaskolka**](https://carleton.ca/jaskolka/), Ph.D., P.Eng, the director of CyberSEA Research Lab.<br />**
