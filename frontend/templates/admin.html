@@ -29,7 +29,11 @@
                     <form action="/admin" method="POST">
                         <tr>
 
-                            <td>{{ user.id }}</td>
+                            <td>
+                                <label>
+                                    <input type="text" name="id" value="{{ user.id }}" readonly/>
+                                </label>
+                            </td>
 
                         <div>
                                 <td><label class = "user-name">
