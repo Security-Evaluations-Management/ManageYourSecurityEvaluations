@@ -1,7 +1,7 @@
 from flask import Blueprint, abort, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from src.include.access_controller import approve_access
-from src import models
+from Platform.src.include.access_controller import approve_access
+from Platform import *
 import pandas as pd
 from werkzeug.utils import secure_filename
 import os
@@ -22,7 +22,7 @@ def criteria():
     if not approve_access(current_user.role.name, 'criteria'):
         abort(403)
 
-    criteria_list = models.get_all_criteria()
+    criteria_list = get_all_criteria()
     allow_modification = approve_access(current_user.role.name, 'criteria_modification')
 
     return render_template('criteria.html', criteria_list=criteria_list, allow_modification=allow_modification)
@@ -39,7 +39,7 @@ def criteria_creation_post():
     description = request.form.get('description')
 
     if cname != "" and description != "":
-        if not models.add_criteria(cname, description, current_user):
+        if not add_criteria(cname, description, current_user):
             flash("upload fail or criteria already exist")
 
     if file and allowed_file(file.filename):
@@ -53,7 +53,7 @@ def criteria_creation_post():
         dataframe = pd.read_csv(file)
         for index, row in dataframe.iterrows():
             print(row['name'] + "," + row['description'])
-            if not models.add_criteria(row['name'], row['description'], current_user):
+            if not add_criteria(row['name'], row['description'], current_user):
                 flash("upload fail or criteria already exist")
 
     return redirect(url_for('criteria.criteria'))
@@ -66,7 +66,7 @@ def criteria_delete_post():
         abort(403)
 
     criteria_to_remove = request.form.get("criteria_to_remove_id")
-    if models.remove_criteria(criteria_to_remove):
+    if remove_criteria(criteria_to_remove):
         return redirect(url_for('criteria.criteria'))
 
     return abort(400)
