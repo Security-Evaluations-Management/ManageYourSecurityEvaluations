@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, abort, request, redirect, url_for, flash, session
 from flask_login import login_required, current_user
-from src import models
+from Platform import *
 from sqlalchemy.exc import SQLAlchemyError
-from src.include.access_controller import approve_access
+from Platform.src.include.access_controller import approve_access
 import os
 
 evidence_blueprint = Blueprint('evidence', __name__)
@@ -14,9 +14,9 @@ UPLOAD_FOLDER = 'upload_files'
 def search():
     if not approve_access(current_user.role.name, 'search'):
         abort(403)
-    employee_name_list = models.users_name()
-    project_name_list = models.projects_name()
-    criteria_name_list = models.get_all_criteria_name()
+    employee_name_list = users_name()
+    project_name_list = projects_name()
+    criteria_name_list = get_all_criteria_name()
 
     return render_template('search.html', employee_names=employee_name_list, project_names=project_name_list,
                            criteria_names=criteria_name_list)
@@ -28,9 +28,9 @@ def search_post():
     if not approve_access(current_user.role.name, 'search'):
         abort(403)
 
-    employee_name_list = models.users_name()
-    project_name_list = models.projects_name()
-    criteria_name_list = models.get_all_criteria_name()
+    employee_name_list = users_name()
+    project_name_list = projects_name()
+    criteria_name_list = get_all_criteria_name()
 
     if request.method == 'POST':
 
@@ -61,7 +61,7 @@ def search_post():
         session['create_time'] = create_time
         session['ledit_time'] = last_edit_time
 
-        results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
+        results = get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
         result_list = results.paginate(page=1, per_page=8, error_out=False)
 
         if result_list.total == 0:
@@ -85,7 +85,7 @@ def search_post():
         create_time = session.get('create_time')
         last_edit_time = session.get('ledit_time')
 
-        results = models.get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
+        results = get_info_by_filter(criteria, project, employee_name, create_time, last_edit_time, id)
         result_list = results.paginate(page=page, per_page=8, error_out=False)
         return render_template('search.html', results=result_list, employee_names=employee_name_list,
                                project_names=project_name_list, criteria_names=criteria_name_list)
@@ -97,7 +97,7 @@ def upload():
     if not approve_access(current_user.role.name, 'upload'):
         abort(403)
 
-    criteria_list = models.criteria_id_name()
+    criteria_list = criteria_id_name()
 
     return render_template('upload.html', criteria_list=criteria_list)
 
@@ -127,7 +127,7 @@ def upload_post():
         if not contents:
             contents = " "
         try:
-            models.add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
+            add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
         except SQLAlchemyError as e:
             flash("evidence upload fail due to file upload fail/evidence name repeat")
             return redirect(url_for('evidence.upload'))
@@ -142,9 +142,9 @@ def view():
         abort(403)
 
     evidence_id = request.args.get("evidence_id")
-    evidence = models.get_evidence_info(evidence_id)
-    linked_criteria = models.get_criteria_by_id(evidence['criteria_id'])
-    creator = models.get_user_by_id(evidence['user_id'])
+    evidence = get_evidence_info(evidence_id)
+    linked_criteria = get_criteria_by_id(evidence['criteria_id'])
+    creator = get_user_by_id(evidence['user_id'])
 
     can_approve = approve_access(current_user.role.name, 'approve_evidence')
 
@@ -177,21 +177,21 @@ def update_evidence():
             if not contents:
                 contents = " "
             try:
-                models.update_evidence_with_file(evidence_id, new_description, contents)
+                update_evidence_with_file(evidence_id, new_description, contents)
             except SQLAlchemyError as e:
                 flash("evidence upload fail due to file upload fail/evidence name repeat")
         else:
-            models.update_evidence(evidence_id, new_description)
+            update_evidence(evidence_id, new_description)
     else:
         if not approve_access(current_user.role.name, 'approve_evidence'):
             abort(403)
 
         if action == 'Approve':
-            models.update_evidence_status(evidence_id, 1)
+            update_evidence_status(evidence_id, 1)
         elif action == 'Disapprove':
-            models.update_evidence_status(evidence_id, -1)
+            update_evidence_status(evidence_id, -1)
         elif action == 'Return to Pending':
-            models.update_evidence_status(evidence_id, 0)
+            update_evidence_status(evidence_id, 0)
 
     return redirect(url_for('evidence.view', evidence_id=evidence_id))
 
@@ -200,13 +200,13 @@ def update_evidence():
 @login_required
 def delete_evidence():
     evidence_id = request.form.get("evidence_id")
-    evidence_to_delete = models.get_evidence_info(evidence_id)
+    evidence_to_delete = get_evidence_info(evidence_id)
 
     if not approve_access(current_user.role.name, 'delete_evidence') or not evidence_to_delete[
                                                                                 'user_id'] == current_user.id:
         abort(403)
 
-    if models.delete_evidence(evidence_id):
+    if delete_evidence(evidence_id):
         return redirect(url_for('main.home'))
 
     abort(400)

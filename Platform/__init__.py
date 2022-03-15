@@ -1,9 +1,53 @@
+from flask import Flask
+from flask_login import LoginManager
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import update, and_, Table
 
-main_db = SQLAlchemy()
+import os
+
+from sqlalchemy import update
+
+template_dir = os.path.abspath('Platform/frontend/templates')
+static_folder = os.path.abspath('Platform/frontend/static')
+server = Flask(__name__, template_folder=template_dir, static_folder=static_folder)
+
+server.config['SECRET_KEY'] = os.urandom(12).hex()
+server.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://empkuwsyisdhch:a9cf00df71d95ca68a69b120' \
+                                           '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
+                                           'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
+server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+server.config['SECRET_KEY'] = os.urandom(24)
+
+main_db = SQLAlchemy(server)
+
+
+def create_app():
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(server)
+
+    with server.app_context():
+        main_db.create_all()  # create database
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    from Platform.src.auth import auth_blueprint
+    server.register_blueprint(auth_blueprint)
+
+    from Platform.src.main import main_blueprint
+    server.register_blueprint(main_blueprint)
+
+    from Platform.src.evidence import evidence_blueprint
+    server.register_blueprint(evidence_blueprint)
+
+    from Platform.src.criteria import criteria_blueprint
+    server.register_blueprint(criteria_blueprint)
+
+    return server
 
 
 class User(main_db.Model, UserMixin):
@@ -245,7 +289,7 @@ def get_info_by_filter(criteria_name, project_name, employee_name, create_time, 
 # get evidence info in detail through evidence id
 def get_evidence_by_id(evidence_id):
     sql = "select " \
-          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content, " \
+          "evidence.id, evidence.name, project_name, create_date_time, last_edit_time, evidence.description, content, "\
           "criteria.id, criteria.name, criteria.description " \
           "from evidence join user on evidence.user_id = user.id" \
           " join criteria on evidence.criteria_id = criteria.id where evidence.id =" + evidence_id
