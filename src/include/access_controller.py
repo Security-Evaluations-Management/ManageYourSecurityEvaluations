@@ -8,7 +8,8 @@ def approve_access(role, action):
             'criteria_modification': True,
             'view': True,
             'update_evidence': True,
-            'delete_evidence': True
+            'delete_evidence': True,
+            'approve_evidence': True
         },
         'DEV': {
             'upload': True,
@@ -21,7 +22,8 @@ def approve_access(role, action):
         'QA': {
             'search': True,
             'criteria': True,
-            'view': True
+            'view': True,
+            'approve_evidence': True
         },
         'User': {
         }
