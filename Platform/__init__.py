@@ -17,6 +17,8 @@ server.config['SECRET_KEY'] = os.urandom(12).hex()
 server.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://empkuwsyisdhch:a9cf00df71d95ca68a69b120' \
                                            '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
                                            'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
+# server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
+#                                                                        'main_db.sqlite3')
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 server.config['SECRET_KEY'] = os.urandom(24)
 
@@ -52,8 +54,8 @@ def create_app():
 
 class User(main_db.Model, UserMixin):
     id = main_db.Column(main_db.Integer, primary_key=True)
-    name = main_db.Column(main_db.String(50))
-    email = main_db.Column(main_db.String(120, collation='NOCASE'), nullable=False, unique=True)
+    name = main_db.Column(main_db.String)
+    email = main_db.Column(main_db.String, nullable=False, unique=True)
     password = main_db.Column(main_db.String(88), nullable=False)
     role_id = main_db.Column(main_db.Integer, main_db.ForeignKey('role.id'), nullable=False)
     criteria = main_db.relationship('Criteria', backref='user', lazy='dynamic')
@@ -64,15 +66,15 @@ class User(main_db.Model, UserMixin):
 class Role(main_db.Model):
     __tablename__ = 'role'
     id = main_db.Column(main_db.Integer(), primary_key=True)
-    name = main_db.Column(main_db.String(50), unique=True)
+    name = main_db.Column(main_db.String, unique=True)
     user = main_db.relationship('User', backref='role', lazy='dynamic')
 
 
 class Evidence(main_db.Model):
     __tablename__ = 'evidence'
     id = main_db.Column(main_db.Integer, primary_key=True)
-    name = main_db.Column(main_db.String(20), unique=True)
-    project_name = main_db.Column(main_db.String(20), nullable=False)
+    name = main_db.Column(main_db.String, unique=True)
+    project_name = main_db.Column(main_db.String, nullable=False)
     create_date_time = main_db.Column(main_db.DateTime, nullable=False)
     last_edit_time = main_db.Column(main_db.DateTime, nullable=False)
     description = main_db.Column(main_db.String)
@@ -96,8 +98,8 @@ class Evidence(main_db.Model):
 class Criteria(main_db.Model):
     __tablename__ = 'criteria'
     id = main_db.Column(main_db.Integer, primary_key=True)
-    name = main_db.Column(main_db.String(20), unique=True)
-    description = main_db.Column(main_db.String(200))
+    name = main_db.Column(main_db.String, unique=True)
+    description = main_db.Column(main_db.String)
     user_id = main_db.Column(main_db.Integer, main_db.ForeignKey('user.id'), nullable=False)
     evidence = main_db.relationship('Evidence', backref='criteria', lazy='dynamic')
 
