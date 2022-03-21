@@ -300,15 +300,26 @@ def get_evidence_by_id(evidence_id):
 
 
 # update evidence description
-def update_evidence(evidence_id, new_description):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description)
-    main_db.engine.execute(stmt)
+def update_evidence_des(evidence_id, new_description):
+    evidence = Evidence.query.filter_by(id=evidence_id).first()
+    if not evidence:
+        return False
+    evidence.description = new_description
+    evidence.last_edit_time = datetime.now().replace(microsecond=0)
+    main_db.session.commit()
+    return True
 
 
 # update evidence content
 def update_evidence_with_file(evidence_id, new_description, contents):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, content=contents)
-    main_db.engine.execute(stmt)
+    evidence = Evidence.query.filter_by(id=evidence_id).first()
+    if not evidence:
+        return False
+    evidence.description = new_description
+    evidence.last_edit_time = datetime.now().replace(microsecond=0)
+    evidence.content = contents
+    main_db.session.commit()
+    return True
 
 
 # convert date format from yyyy/mm/dd to yyyy-mm-dd

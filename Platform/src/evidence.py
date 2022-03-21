@@ -181,7 +181,7 @@ def update_evidence():
             except SQLAlchemyError as e:
                 flash("evidence upload fail due to file upload fail/evidence name repeat")
         else:
-            update_evidence(evidence_id, new_description)
+            update_evidence_des(evidence_id, new_description)
     else:
         if not approve_access(current_user.role.name, 'approve_evidence'):
             abort(403)
