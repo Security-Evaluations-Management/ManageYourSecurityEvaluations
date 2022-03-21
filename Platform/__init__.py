@@ -15,10 +15,10 @@ server = Flask(__name__, template_folder=template_dir, static_folder=static_fold
 
 server.config['SECRET_KEY'] = os.urandom(12).hex()
 server.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://empkuwsyisdhch:a9cf00df71d95ca68a69b120' \
-                                           '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
-                                           'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
+                                          '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
+                                          'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
 # server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-#                                                                        'main_db.sqlite3')
+#                                                                      'main_db.sqlite3')
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 server.config['SECRET_KEY'] = os.urandom(24)
 
