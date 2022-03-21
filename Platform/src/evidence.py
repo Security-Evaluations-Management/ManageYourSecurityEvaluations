@@ -198,7 +198,7 @@ def update_evidence():
 
 @evidence_blueprint.route('/delete_evidence', methods=['POST'])
 @login_required
-def delete_evidence():
+def evidence_delete():
     evidence_id = request.form.get("evidence_id")
     evidence_to_delete = get_evidence_info(evidence_id)
 
