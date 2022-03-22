@@ -306,6 +306,7 @@ def update_evidence_des(evidence_id, new_description):
         return False
     evidence.description = new_description
     evidence.last_edit_time = datetime.now().replace(microsecond=0)
+    evidence.status = 0
     main_db.session.commit()
     return True
 
@@ -318,6 +319,7 @@ def update_evidence_with_file(evidence_id, new_description, contents):
     evidence.description = new_description
     evidence.last_edit_time = datetime.now().replace(microsecond=0)
     evidence.content = contents
+    evidence.status = 0
     main_db.session.commit()
     return True
 
