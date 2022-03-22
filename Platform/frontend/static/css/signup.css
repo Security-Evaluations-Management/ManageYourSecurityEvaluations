@@ -1,6 +1,9 @@
-ul[id="navigation_bar"] li.login a{
-    color: #FF844B;
+ul[id="navigation_bar"] li.signup{
     border-bottom-color: #FF844B;
+}
+
+ul[id="navigation_bar"] li.signup a{
+    color: #FF844B;
 }
 
 h3{

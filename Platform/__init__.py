@@ -15,10 +15,10 @@ server = Flask(__name__, template_folder=template_dir, static_folder=static_fold
 
 server.config['SECRET_KEY'] = os.urandom(12).hex()
 server.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://empkuwsyisdhch:a9cf00df71d95ca68a69b120' \
-                                           '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
-                                           'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
+                                          '6664c0fb801ef4eab6ecf443f1de5e0bd6876b80@ec2-44-194-167-63.' \
+                                          'compute-1.amazonaws.com:5432/deuoe3ubmqjkhn'
 # server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)),
-#                                                                        'main_db.sqlite3')
+#                                                                      'main_db.sqlite3')
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 server.config['SECRET_KEY'] = os.urandom(24)
 
@@ -300,15 +300,26 @@ def get_evidence_by_id(evidence_id):
 
 
 # update evidence description
-def update_evidence(evidence_id, new_description):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, status=0)
-    main_db.engine.execute(stmt)
+def update_evidence_des(evidence_id, new_description):
+    evidence = Evidence.query.filter_by(id=evidence_id).first()
+    if not evidence:
+        return False
+    evidence.description = new_description
+    evidence.last_edit_time = datetime.now().replace(microsecond=0)
+    main_db.session.commit()
+    return True
 
 
 # update evidence content
 def update_evidence_with_file(evidence_id, new_description, contents):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, content=contents, status=0)
-    main_db.engine.execute(stmt)
+    evidence = Evidence.query.filter_by(id=evidence_id).first()
+    if not evidence:
+        return False
+    evidence.description = new_description
+    evidence.last_edit_time = datetime.now().replace(microsecond=0)
+    evidence.content = contents
+    main_db.session.commit()
+    return True
 
 
 # convert date format from yyyy/mm/dd to yyyy-mm-dd

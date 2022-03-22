@@ -60,9 +60,11 @@ input[type=submit]:hover {
 form {
     margin-right: 100px;
     margin-left: 100px;
+    position: relative;
+
 }
 
-div, p {
+div{
     margin-bottom: 5px;
     margin-top: 5px;
 

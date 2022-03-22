@@ -87,7 +87,6 @@ input[type=submit]:hover {
     background: #bfcdff;
 }
 
-
 select{
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -113,7 +112,6 @@ option[value=""][disabled]{
     display: none;
       }
 
-
 option:focus{
    outline: none;
    border-color: #0077FF;
@@ -121,9 +119,12 @@ option:focus{
    rgba(#0077FF,.2);
        }
 
-
 option:hover {
     stroke: #0077FF;
     }
+
+li.msg{
+    color: #b12525
+}
 
 
