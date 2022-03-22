@@ -122,17 +122,17 @@ def upload_post():
     if file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
-        f = open(file_path, 'r')
+        f = open(file_path, 'rb')
         contents = f.read()
         if not contents:
             contents = " "
         try:
-            add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
+            id = add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
         except SQLAlchemyError as e:
             flash("evidence upload fail due to file upload fail/evidence name repeat")
             return redirect(url_for('evidence.upload'))
         # return redirect(url_for('evidence.view', evidence_id=evidence_id))
-    return redirect(url_for('evidence.upload'))
+    return redirect(url_for('evidence.view', evidence_id=id))
 
 
 @evidence_blueprint.route('/view', methods=['GET'])
@@ -181,7 +181,7 @@ def update_evidence():
             except SQLAlchemyError as e:
                 flash("evidence upload fail due to file upload fail/evidence name repeat")
         else:
-            update_evidence(evidence_id, new_description)
+            update_evidence_des(evidence_id, new_description)
     else:
         if not approve_access(current_user.role.name, 'approve_evidence'):
             abort(403)
@@ -198,7 +198,7 @@ def update_evidence():
 
 @evidence_blueprint.route('/delete_evidence', methods=['POST'])
 @login_required
-def delete_evidence():
+def evidence_delete():
     evidence_id = request.form.get("evidence_id")
     evidence_to_delete = get_evidence_info(evidence_id)
 
