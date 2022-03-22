@@ -115,7 +115,14 @@
                 {% endif %}
             {% endwith %}
         </div>
-        <input type="submit" value="Submit Changes" name="action"><br>
+        {% if can_update %}
+            <input type="submit" value="Submit Changes" name="action"><br>
+        {% endif %}
+        {% if can_delete %}
+            <div>
+                <input type="submit" value="Delete" name="action">
+            </div>
+        {% endif %}
         {% if can_approve %}
             <div>
                 <input type="submit" value="Approve" name="action">

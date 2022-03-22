@@ -100,8 +100,7 @@ def admin_post():
             return redirect(url_for('auth.admin'))
     elif action == "Reset Password":
         default_password = "default_password"
-        if update_user_password(user_id,
-                                       generate_password_hash(default_password, method='sha256', salt_length=16)):
+        if update_user_password(user_id, generate_password_hash(default_password, method='sha256', salt_length=16)):
             return redirect(url_for('auth.admin'))
 
     return abort(400)
