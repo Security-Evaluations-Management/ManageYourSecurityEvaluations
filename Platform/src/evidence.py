@@ -7,6 +7,7 @@ import os
 
 evidence_blueprint = Blueprint('evidence', __name__)
 UPLOAD_FOLDER = 'upload_files'
+ALLOWED_EXTENTION = {'txt'}
 
 
 @evidence_blueprint.route('/search')
@@ -91,6 +92,10 @@ def search_post():
                                project_names=project_name_list, criteria_names=criteria_name_list)
 
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTION
+
+
 @evidence_blueprint.route('/upload')
 @login_required
 def upload():
@@ -119,7 +124,10 @@ def upload_post():
     if not os.path.exists(file_dir):
         os.makedirs(file_dir)
 
-    if file:
+    if file and not allowed_file(file.filename):
+        flash("evidence upload fail (not txt file)")
+        return redirect(url_for('evidence.upload'))
+    elif file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
         f = open(file_path, 'rb')
@@ -129,7 +137,7 @@ def upload_post():
         try:
             id = add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
         except SQLAlchemyError as e:
-            flash("evidence upload fail due to file upload fail/evidence name repeat")
+            flash("evidence upload fail (evidence name already exist)")
             return redirect(url_for('evidence.upload'))
         # return redirect(url_for('evidence.view', evidence_id=evidence_id))
     return redirect(url_for('evidence.view', evidence_id=id))
