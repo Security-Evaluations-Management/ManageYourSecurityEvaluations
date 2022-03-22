@@ -301,13 +301,13 @@ def get_evidence_by_id(evidence_id):
 
 # update evidence description
 def update_evidence(evidence_id, new_description):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description)
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, status=0)
     main_db.engine.execute(stmt)
 
 
 # update evidence content
 def update_evidence_with_file(evidence_id, new_description, contents):
-    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, content=contents)
+    stmt = update(Evidence).where(Evidence.id == evidence_id).values(description=new_description, content=contents, status=0)
     main_db.engine.execute(stmt)
 
 
