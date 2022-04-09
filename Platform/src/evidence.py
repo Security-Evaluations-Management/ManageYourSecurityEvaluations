@@ -7,6 +7,7 @@ import os
 
 evidence_blueprint = Blueprint('evidence', __name__)
 UPLOAD_FOLDER = 'upload_files'
+ALLOWED_EXTENTION = {'txt'}
 
 
 @evidence_blueprint.route('/search')
@@ -91,6 +92,10 @@ def search_post():
                                project_names=project_name_list, criteria_names=criteria_name_list)
 
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTION
+
+
 @evidence_blueprint.route('/upload')
 @login_required
 def upload():
@@ -119,7 +124,10 @@ def upload_post():
     if not os.path.exists(file_dir):
         os.makedirs(file_dir)
 
-    if file:
+    if file and not allowed_file(file.filename):
+        flash("evidence upload fail (not txt file)")
+        return redirect(url_for('evidence.upload'))
+    elif file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
         f = open(file_path, 'rb')
@@ -129,7 +137,7 @@ def upload_post():
         try:
             id = add_evidence(evidence_name, project_name, description, contents, user_id, criteria_id)
         except SQLAlchemyError as e:
-            flash("evidence upload fail due to file upload fail/evidence name repeat")
+            flash("evidence upload fail (evidence name already exist)")
             return redirect(url_for('evidence.upload'))
         # return redirect(url_for('evidence.view', evidence_id=evidence_id))
     return redirect(url_for('evidence.view', evidence_id=id))
@@ -146,10 +154,12 @@ def view():
     linked_criteria = get_criteria_by_id(evidence['criteria_id'])
     creator = get_user_by_id(evidence['user_id'])
 
+    can_delete = approve_access(current_user.role.name, 'delete_evidence')
     can_approve = approve_access(current_user.role.name, 'approve_evidence')
+    can_update = approve_access(current_user.role.name, 'update_evidence')
 
     return render_template('view.html', evidence=evidence, linked_criteria=linked_criteria, creator=creator,
-                           can_approve=can_approve)
+                           can_approve=can_approve, can_delete=can_delete, can_update=can_update)
 
 
 @evidence_blueprint.route('/update_evidence', methods=['POST'])
@@ -172,16 +182,22 @@ def update_evidence():
         if file:
             file_path = os.path.join(file_dir, file.filename)
             file.save(file_path)
-            f = open(file_path, 'r')
+            f = open(file_path, 'rb')
             contents = f.read()
             if not contents:
                 contents = " "
             try:
                 update_evidence_with_file(evidence_id, new_description, contents)
+                update_evidence_status(evidence_id, 0)
             except SQLAlchemyError as e:
                 flash("evidence upload fail due to file upload fail/evidence name repeat")
         else:
             update_evidence_des(evidence_id, new_description)
+            update_evidence_status(evidence_id, 0)
+
+    elif action == 'Delete':
+        if delete_evidence(evidence_id):
+            return redirect(url_for('main.home'))
     else:
         if not approve_access(current_user.role.name, 'approve_evidence'):
             abort(403)
