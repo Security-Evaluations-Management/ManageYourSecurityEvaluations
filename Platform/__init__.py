@@ -104,12 +104,6 @@ class Criteria(main_db.Model):
     evidence = main_db.relationship('Evidence', backref='criteria', lazy='dynamic')
 
 
-# association_table = Table('association', Base.metadata,
-#                           Column('left_id', ForeignKey('left.id')),
-#                           Column('right_id', ForeignKey('right.id'))
-#                           )
-
-
 def add_new_user(email, password, name):
     new_user = User(email=email, password=password, name=name)
 
@@ -230,6 +224,10 @@ def get_all_criteria_name():
     criteria_names = list(dict.fromkeys(criteria_names))
     return criteria_names
 
+
+def get_all_failed_evidence(user_id):
+    evidence = main_db.session.query(Evidence).join(User).filter(User.id == user_id, Evidence.status == -1).all()
+    return evidence
 
 # get a pair of criteria id and name
 def criteria_id_name():
