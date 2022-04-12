@@ -130,7 +130,7 @@ def upload_post():
     elif file:
         file_path = os.path.join(file_dir, file.filename)
         file.save(file_path)
-        f = open(file_path, 'rb')
+        f = open(file_path, 'r')
         contents = f.read()
         if not contents:
             contents = " "
@@ -182,7 +182,7 @@ def update_evidence():
         if file:
             file_path = os.path.join(file_dir, file.filename)
             file.save(file_path)
-            f = open(file_path, 'rb')
+            f = open(file_path, 'r')
             contents = f.read()
             if not contents:
                 contents = " "
