@@ -42,7 +42,7 @@ Team Members includes:<br />
 
 
 ## Getting Started
-This is an example of how to run the project.
+<!-- This is an example of how to run the project.
 
 ### Prerequest:
 * [**Python**](https://www.python.org/): Recommend using the latest version of Python.
@@ -84,7 +84,8 @@ Below is an example of how to run the project.
 	To change the Host and port, replace the **Step 4** command with
 	```sh
 	flask run --host=x.x.x.x --port=xxxx
-	```
+	``` -->
+The web application is now been deployed to the Heroku Cloud Server.<br />To access ManageYourSecurityEvaluations, please go https://security-evaluation.herokuapp.com/.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
