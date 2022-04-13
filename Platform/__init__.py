@@ -56,7 +56,7 @@ class User(main_db.Model, UserMixin):
     id = main_db.Column(main_db.Integer, primary_key=True)
     name = main_db.Column(main_db.String)
     email = main_db.Column(main_db.String, nullable=False, unique=True)
-    password = main_db.Column(main_db.String(88), nullable=False)
+    password = main_db.Column(main_db.String(128), nullable=False)
     role_id = main_db.Column(main_db.Integer, main_db.ForeignKey('role.id'), nullable=False)
     criteria = main_db.relationship('Criteria', backref='user', lazy='dynamic')
     evidence = main_db.relationship('Evidence', backref='user', lazy='dynamic')

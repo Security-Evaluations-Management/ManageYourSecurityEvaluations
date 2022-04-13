@@ -50,7 +50,7 @@ def signup_post():
         flash('Please follow the password rules.')
         return redirect(url_for('auth.signup'))
 
-    add_new_user(email, generate_password_hash(password, method='sha256', salt_length=16), name)
+    add_new_user(email, generate_password_hash(password, method='sha256', salt_length=32), name)
 
     return redirect(url_for('auth.login'))
 
@@ -100,7 +100,7 @@ def admin_post():
             return redirect(url_for('auth.admin'))
     elif action == "Reset Password":
         default_password = "default_password"
-        if update_user_password(user_id, generate_password_hash(default_password, method='sha256', salt_length=16)):
+        if update_user_password(user_id, generate_password_hash(default_password, method='sha256', salt_length=32)):
             return redirect(url_for('auth.admin'))
 
     return abort(400)
@@ -113,7 +113,7 @@ def update_profile():
 
     if new_password:
         if not update_user_password(current_user.id,
-                                           generate_password_hash(new_password, method='sha256', salt_length=16)):
+                                           generate_password_hash(new_password, method='sha256', salt_length=32)):
             return abort(400)
 
     if not new_name == '' and not new_name == current_user.name:
